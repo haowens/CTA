@@ -1,0 +1,225 @@
+body {
+    margin: 0;
+    background-color: rgb(255, 255, 255);
+  }
+  
+  :root {
+    --gray-dark: #5b5b5b;
+    --gray: #969696;
+    --off-white: #f4f4f4;
+    --bg: #fff;
+    --primary: goldenrod;
+    --secondary: teal;
+  }
+  
+  /* Styles for .filler */
+  .filler {
+    height: 20rem;
+    text-align: center;
+  }
+  
+  section {
+    display: flex;
+    flex-direction: row;
+  }
+
+  #scrolly-side {
+    border: 1px solid pink;
+  }
+
+  /* Styles for #scrolly-side .scrolly */
+  #scrolly-side .scrolly {
+    display: flex;
+    /* max-width: 60rem; */
+    width: 90%;
+    margin: 3rem auto;
+    /* background-color: var(--off-white); */
+    padding: 1rem;
+    border: 1px solid yellow
+  }
+  
+  #scrolly-side .scrolly > * {
+    /* flex: 1; */
+  }
+  
+  #scrolly-side .scrolly article {
+    padding-right: 1rem;
+    display: flex;
+    flex-direction: column;
+    width:20%;
+    /* max-width: 30rem; */
+    justify-content: center;
+    align-items: center;
+    border: 1px solid green;
+  }
+  
+  #scrolly-side .scrolly article .step {
+    min-height: 100vh;
+    width: 100%;
+    margin-bottom: 1rem;
+    /* background-color: var(--gray-dark); */
+    transition: background-color 250ms ease-in-out;
+    border: 1px solid red;
+  }
+  
+  #scrolly-side .scrolly article .step:last-of-type {
+    margin-bottom: 0;
+  }
+  
+  #scrolly-side .scrolly article .step.is-active {
+    background-color: var(--secondary);
+  }
+  
+  #scrolly-side .scrolly article .step p {
+    margin: 0;
+    padding: 1rem;
+    text-align: center;
+    font-weight: 400;
+    color: var(--off-white);
+  }
+  
+  /* #scrolly-side .scrolly figure.sticky {
+    position: sticky;
+    width: 90%;
+    height: 70vh;
+    margin: 0;
+    top: 25vh;
+    left: 0;
+    border: 1px solid purple;
+    z-index: 5;
+  } */
+
+  figure.sticky {
+    position: sticky;
+    width: 100vw;
+    /* height: 100vh; */
+    background: rgba(187, 40, 40, 0);
+    margin: 0;
+    top: 0;
+    left: 0;
+    z-index: 5;
+  }
+
+  figure.fixed {
+    position: sticky;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(187, 40, 40, 0);
+    margin: 0;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+  
+  #mainfig {
+    position: sticky;
+    /* top: 5%; */
+    /* left: 5%; */
+    /* transform: translateY(-10%); */
+    width: 60vw;
+    height: 30vh;
+    /* background-color: var(--bg); */
+    z-index: -1;
+  }
+  
+  #scrolly-side .scrolly figure.sticky .bar-inner {
+    width: 10%;
+    height: 100%;
+    transition: width 1s ease-in-out;
+    background-color: var(--primary);
+  }
+
+  #route {
+    position: sticky;
+    width: 100%;
+    z-index: 10;
+    background-color: white;
+    border-bottom: 2px solid gray;
+  }
+
+  #scrolly-overlay {
+    border: 1px solid yellow;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    background-color: transparent;
+  }
+
+  #scrolly-overlay .scrolly {
+    width: 100%;
+    border: 1px solid pink;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    /* margin: 3rem auto;
+    background-color: #f4f4f4;
+    padding: 1rem */
+}
+
+#scrolly-overlay .scrolly article {
+    padding: 0;
+    width: 100%;
+    /* max-width: 30rem; */
+    margin: 0 auto;
+    position: relative;
+}
+
+#scrolly-overlay .scrolly article .step {
+    height: 120vh;
+    margin-left: 62%;
+    margin-right: 5%;
+    margin-bottom: 1rem;
+    border: 1px solid orange;
+}
+
+#scrolly-overlay .scrolly article .step:last-of-type {
+    margin-bottom: 0
+}
+
+#scrolly-overlay .scrolly article .step.is-active p {
+    background-color: teal
+}
+
+#scrolly-overlay .scrolly article .step p {
+    margin: 0;
+    padding: 1rem;
+    text-align: center;
+    font-weight: 400;
+    background-color: #5b5b5b90;
+    /* width: 50%; */
+    -webkit-transition: background-color 250ms ease-in-out;
+    -o-transition: background-color 250ms ease-in-out;
+    transition: background-color 250ms ease-in-out;
+    color: #f4f4f4;
+    font-size: 24px
+}
+
+#scrolly-overlay .scrolly figure.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    width: 100%;
+    /* background: #969696; */
+    margin: 0;
+    /* top: 25vh;
+    height: 50vh; */
+    left: 0;
+    top: 20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid green;
+    z-index: 0;
+}
+
+#scrolly-overlay .scrolly figure.sticky .mainfig {
+    position: -webkit-sticky;
+    position: sticky;
+    width: 100%;
+    /* background: #969696; */
+    margin: 0;
+    /* top: 25vh; */
+    /* height: 100%; */
+    left: 0;
+}
