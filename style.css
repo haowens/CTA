@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-color: rgb(255, 255, 255);
+    background-color: black;
   }
   
   :root {
@@ -9,18 +9,26 @@ body {
     --off-white: #f4f4f4;
     --bg: #fff;
     --primary: goldenrod;
-    --secondary: teal;
+    --secondary: orange;
   }
   
   /* Styles for .filler */
   .filler {
-    height: 20rem;
-    text-align: center;
+    /* height: 20rem; */
+    text-align: left;
+    width: 100%;
+    color: black;
+    background-color: white;
+  }
+
+  .filler img {
+    width: 100%;
+    object-fit: cover;
   }
   
   section {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
   }
 
   #scrolly-side {
@@ -35,7 +43,6 @@ body {
     margin: 3rem auto;
     /* background-color: var(--off-white); */
     padding: 1rem;
-    border: 1px solid yellow
   }
   
   #scrolly-side .scrolly > * {
@@ -50,7 +57,6 @@ body {
     /* max-width: 30rem; */
     justify-content: center;
     align-items: center;
-    border: 1px solid green;
   }
   
   #scrolly-side .scrolly article .step {
@@ -118,7 +124,6 @@ body {
     /* transform: translateY(-10%); */
     width: 60vw;
     height: 30vh;
-    /* background-color: var(--bg); */
     z-index: -1;
   }
   
@@ -138,7 +143,6 @@ body {
   }
 
   #scrolly-overlay {
-    border: 1px solid yellow;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -148,7 +152,6 @@ body {
 
   #scrolly-overlay .scrolly {
     width: 100%;
-    border: 1px solid pink;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -168,10 +171,9 @@ body {
 
 #scrolly-overlay .scrolly article .step {
     height: 120vh;
-    margin-left: 62%;
-    margin-right: 5%;
+    margin-left: 25%;
+    margin-right: 25%;
     margin-bottom: 1rem;
-    border: 1px solid orange;
 }
 
 #scrolly-overlay .scrolly article .step:last-of-type {
@@ -179,21 +181,23 @@ body {
 }
 
 #scrolly-overlay .scrolly article .step.is-active p {
-    background-color: teal
+    background-color: #5f4e319d;
+    border: 1px solid orange;
 }
 
 #scrolly-overlay .scrolly article .step p {
     margin: 0;
     padding: 1rem;
-    text-align: center;
+    text-align: left;
     font-weight: 400;
-    background-color: #5b5b5b90;
+    background-color: #3e3e3e90;
     /* width: 50%; */
     -webkit-transition: background-color 250ms ease-in-out;
     -o-transition: background-color 250ms ease-in-out;
     transition: background-color 250ms ease-in-out;
     color: #f4f4f4;
-    font-size: 24px
+    font-size: 24px;
+    border: 1px solid rgb(33, 33, 33);
 }
 
 #scrolly-overlay .scrolly figure.sticky {
@@ -209,7 +213,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid green;
     z-index: 0;
 }
 

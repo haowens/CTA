@@ -1,52 +1,280 @@
-const data = [
+const monthAvgData = [
     {
-        index: 1,
-        month: 'Jan',
-        rides: 549707,
-        magnitude: 5,  
+      index: 1,
+      month: 'Jan 20',
+      year: '2020',
+      rides: 549707, 
     },
     {
-        index: 2,
-        month: 'Feb',
-        rides: 559504.4,
-        magnitude: 2.9,  
+      index: 2,
+      month: 'Feb 20',
+      year: '2020',
+      rides: 559504.4,        
     },
     {
-        index: 3,
-        month: 'Mar',
-        rides: 306601.4,
-        magnitude: 5.6,  
+      index: 3,
+      month: 'Mar 20',
+      year: '2020',
+      rides: 306601.4,
     },
     {
-        index: 4,
-        month: 'Apr',
-        rides: 68155.7,
-        magnitude: 2.7,  
+      index: 4,
+      month: 'Apr 20',
+      year: '2020',
+      rides: 68155.7,
     },
     {
-        index: 5,
-        month: 'May',
-        rides: 68377.1,
-        magnitude: 4.1,  
+      index: 5,
+      month: 'May 20',
+      year: '2020',
+      rides: 68377.1,
     },
     {
-        index: 6,
-        month: 'Jun',
-        rides: 87061.4,
-        magnitude: 3.9,  
+      index: 6,
+      month: 'Jun 20',
+      year: '2020',
+      rides: 87061.4,
     },
     {
-        index: 7,
-        month: 'Jul',
-        rides: 125172.5,
-        magnitude: 3.3,  
+      index: 7,
+      month: 'Jul 20',
+      year: '2020',
+      rides: 125172.5,
     },
     {
-        index: 8,
-        month: 'Aug',
-        rides: 125893.1,
-        magnitude: 4.9,  
+      index: 8,
+      month: 'Aug 20',
+      year: '2020',
+      rides: 125893.1,
     },
+    {
+      index: 9,
+      month: 'Sept 20',
+      year: '2020',
+      rides: 138459.3,
+    },
+    {
+      index: 10,
+      month: 'Oct 20',
+      year: '2020',
+      rides: 138946.2,
+    },
+    {
+      index: 11,
+      month: 'Nov 20',
+      year: '2020',
+      rides: 120186.2,
+    },
+    {
+      index: 12,
+      month: 'Dec 20',
+      year: '2020',
+      rides: 110768.5,
+    },
+    {
+      index: 13,
+      month: 'Jan 21',
+      year: '2021',
+      rides: 111195.9,
+    },
+    {
+      index: 14,
+      month: 'Feb 21',
+      year: '2021',
+      rides: 120157.6,
+    },
+    {
+      index: 15,
+      month: 'Mar 21',
+      year: '2021',
+      rides: 135312.4,
+    },  
+    {
+      index: 16,
+      month: 'Apr 21',
+      year: '2021',
+      rides: 148614.3,
+    },
+    {
+      index: 17,
+      month: 'May 21',
+      year: '2021',
+      rides: 166836.1,
+    },
+    {
+      index: 18,
+      month: 'Jun 21',
+      year: '2021',
+      rides: 199886.2,
+    },  
+    {
+      index: 19,
+      month: 'Jul 21',
+      year: '2021',
+      rides: 236309.6,
+    },
+    {
+      index: 20,
+      month: 'Aug 21',
+      year: '2021',
+      rides: 233560.9,
+    },
+    {
+      index: 21,
+      month: 'Sept 21',
+      year: '2021',
+      rides: 277958.4, 
+    },
+    {
+      index: 22,
+      month: 'Oct 21',
+      year: '2021',
+      rides: 272231.7,
+    },
+    {
+      index: 23,
+      month: 'Nov 21',
+      year: '2021',
+      rides: 255359.6,
+    },
+    {
+      index: 24,
+      month: 'Dec 21',
+      year: '2021',
+      rides: 219673.6, 
+    },
+    {
+      index: 25,
+      month: 'Jan 22',
+      year: '2022',
+      rides: 178244.7, 
+    },
+    {
+      index: 26,
+      month: 'Feb 22',
+      year: '2022',
+      rides: 224114.9, 
+    },
+    {
+      index: 27,
+      month: 'Mar 22',
+      year: '2022',
+      rides: 252723.8, 
+    },
+    {
+      index: 28,
+      month: 'Apr 22',
+      year: '2022',
+      rides: 261386.6, 
+    },
+    {
+      index: 29,
+      month: 'May 22',
+      year: '2022',
+      rides: 271458, 
+    },
+    {
+      index: 30,
+      month: 'Jun 22',
+      year: '2022',
+      rides: 282065.2, 
+    },
+    {
+      index: 31,
+      month: 'Jul 22',
+      year: '2022',
+      rides: 280862.3, 
+    },
+    {
+      index: 32,
+      month: 'Aug 22',
+      year: '2022',
+      rides: 286780.5, 
+    },
+    {
+      index: 33,
+      month: 'Sept 22',
+      year: '2022',
+      rides: 323348.2, 
+    },
+    {
+      index: 34,
+      month: 'Oct 22',
+      year: '2022',
+      rides: 315299.1, 
+    },    
+    {
+      index: 35,
+      month: 'Nov 22',
+      year: '2022',
+      rides: 288369.9, 
+    },
+    {
+      index: 36,
+      month: 'Dec 22',
+      year: '2022',
+      rides: 245049.8, 
+    },
+    {
+      index: 37,
+      month: 'Jan 23',
+      year: '2023',
+      rides: 260477.7, 
+    },
+    {
+      index: 38,
+      month: 'Feb 23',
+      year: '2023',
+      rides: 270580.6, 
+    },
+    {
+      index: 39,
+      month: 'Mar 23',
+      year: '2023',
+      rides: 285183.2, 
+    },
+    {
+      index: 40,
+      month: 'Apr 23',
+      year: '2023',
+      rides: 303530.4, 
+    },
+    {
+      index: 41,
+      month: 'May 23',
+      year: '2023',
+      rides: 314377.8, 
+    },
+    {
+      index: 42,
+      month: 'Jun 23',
+      year: '2023',
+      rides: 318334.6, 
+    },
+    {
+      index: 43,
+      month: 'Jul 23',
+      year: '2023',
+      rides: 309116.9, 
+    },
+    {
+      index: 44,
+      month: 'Aug 23',
+      year: '2023',
+      rides: 328712, 
+    },
+    {
+      index: 45,
+      month: 'Sept 23',
+      year: '2023',
+      rides: 354217.8, 
+    },
+    {
+      index: 46,
+      month: 'Oct 23',
+      year: '2023',
+      rides: 352159.6, 
+    }
 ]
 
 const dotData = [
@@ -65,7 +293,7 @@ let svg2;
 // train route functions
 function initializeRoute() {
     let margin = { top: 0, right: 0, bottom: 0, left: 0 },
-      width = 100% - margin.left - margin.right,
+      width = window.innerWidth - margin.left - margin.right,
       height = 153 - margin.top - margin.bottom;
 
     svg = d3
@@ -77,18 +305,19 @@ function initializeRoute() {
       .style("z-index", 10)
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    const rectWidth = 1500;
+    const rectWidth = window.innerWidth;
     const rectHeight = 42;
     const numDots = 12;
 
-    const dotSpacing = (rectWidth - 200) / (numDots - 1);
+    const dotSpacing = (rectWidth - 100) / (numDots - 1);
 
     svg.append("rect")
       .attr("x", 0)
       .attr("y", 0)
       .attr("width", rectWidth)
       .attr("height", rectHeight)
-      .style("fill", "#383838")
+      .style("fill", "#706f6d")
+      // .style("fill", "#383838")
     
     for (let i = 0; i < numDots; i++) {
         const isBlackBorder = [7, 9, 10].includes(i);
@@ -106,14 +335,15 @@ function initializeRoute() {
                 .attr("y", 50)
                 .attr("width", 70)
                 .attr("height", 35)
-                .style("fill", "#755c42");
+                .style("fill", "#d9a74c");
          
             svg.append("rect")
                 .attr("x", (i * dotSpacing) + 25)
                 .attr("y", 92)
                 .attr("width", 70)
                 .attr("height", 37)
-                .style("fill", "#ff8ac0");
+                // .style("fill", "#ff8ac0");
+                .style("fill", "#4a3510");
 
             svg.append("circle")
                 .attr("cx", (i * dotSpacing) + 60)
@@ -169,106 +399,181 @@ function initializeRoute() {
 }
 
 // bar graph functions
-function drawPandemicBars() {
+function drawBarGraphBackground() {
     console.log("yo")
-    let margin = { top: 50, right: 25, bottom: 45, left: 0 },
-      width = 1200 - margin.left - margin.right,
-      height = 620 - margin.top - margin.bottom;
+    let margin = { top: 5, right: 0, bottom: 157, left: 0 },
+      width = window.innerWidth - margin.left - margin.right,
+      height = window.innerHeight - margin.top - margin.bottom;
 
-    console.log(data)
     svg2 = d3
       .select("#mainfig")
       .append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
-      .style("z-index", -1)
-      .attr("transform", `translate(${margin.left},${margin.top})`)
-      .style("border", "1px solid green");
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    svg2.append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", width *(12/46))
+      .attr("height", height)
+      .style("fill", "#3f3f3f90")
+
+    svg2.append("rect")
+      .attr("x", width * (12/46))
+      .attr("y", 0)
+      .attr("width", width *(12/46))  
+      .attr("height", height)
+      .style("fill", "#38383890");
+
+    svg2.append("rect")
+      .attr("x", width *(24/46))
+      .attr("y", 0)
+      .attr("width", width *(12/46))  
+      .attr("height", height)
+      .style("fill", "#32313190");
+
+    svg2.append("rect")
+      .attr("x", width * (36 /46))
+      .attr("y", 0)
+      .attr("width", width *(12/46))  
+      .attr("height", height)
+      .style("fill", "#2b2b2b90");
+    
+    svg2.append("text") // Append text for the label
+      .attr("x", width *(12/46)-50) // Set x position of the text
+      .attr("y", height / 12) // Set y position of the text
+      .attr("fill", "#878787") // Set text color
+      .attr("text-anchor", "middle") // Set text anchor to middle
+      .attr("alignment-baseline", "middle") // Set alignment baseline to middle
+      .style("font-size", "xx-large") // Set font size
+      .attr("font-family", "Helvetica")
+      .attr("font-weight", "700")
+      .text("2020"); // Set the text content;
+
+    svg2.append("text") // Append text for the label
+      .attr("x", width *(24/ 46)-50) // Set x position of the text
+      .attr("y", height / 12) // Set y position of the text
+      .attr("fill", "#878787") // Set text color
+      .attr("text-anchor", "middle") // Set text anchor to middle
+      .attr("alignment-baseline", "middle") // Set alignment baseline to middle
+      .style("font-size", "xx-large") // Set font size
+      .attr("font-family", "Helvetica")
+      .attr("font-weight", "700")
+      .text("2021"); // Set the text content;
+
+    svg2.append("text") // Append text for the label
+      .attr("x", width *(36/ 46)-50 )// Set x position of the text
+      .attr("y", height / 12) // Set y position of the text
+      .attr("fill", "#878787") // Set text color
+      .attr("text-anchor", "middle") // Set text anchor to middle
+      .attr("alignment-baseline", "middle") // Set alignment baseline to middle
+      .style("font-size", "xx-large") // Set font size
+      .attr("font-family", "Helvetica")
+      .attr("font-weight", "700")
+      .text("2022"); // Set the text content;
+
+    svg2.append("text") // Append text for the label
+      .attr("x", width *(46/ 46) - 50 )// Set x position of the text
+      .attr("y", height / 12) // Set y position of the text
+      .attr("fill", "#878787") // Set text color
+      .attr("text-anchor", "middle") // Set text anchor to middle
+      .attr("alignment-baseline", "middle") // Set alignment baseline to middle
+      .style("font-size", "xx-large") // Set font size
+      .attr("font-family", "Helvetica")
+      .attr("font-weight", "700")
+      .text("2023"); // Set the text content;
+
 
     var x = d3
       .scaleBand()
-      .range([0, width])
+      .range([0, width - 0])
       .domain(
-      data.map(function (d) {
+      monthAvgData.map(function (d) {
         return d.month;
       })
     )
     .padding(0.2);
 
-    var y = d3.scaleLinear().domain([0, 559504.4]).range([height, 0]);
+    var maxRides = d3.max(monthAvgData, function(d) { return d.rides; });
+
+    var y = d3.scaleLinear()
+      .domain([0, maxRides]) 
+      .range([height, 0]);
 
     labels = svg2
       .append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x))
-      .style("color", "black")
       .selectAll("text")
       .style("text-anchor", "center")
       .style("font-size", "14px")
       .style("font-weight", "bold")
-      .style("color", "#A8A8A8");
+      .attr("fill", "white");
 
     // Add Y axis (hidden b/c black)
-    svg2.append("g").call(d3.axisLeft(y)).style("color", "black");
+    svg2.append("g").call(d3.axisLeft(y)).selectAll("text").attr("fill", "white");
 
-    // add bar chart
-    const barChart = svg2
-      .selectAll("mybar")
-      .attr("class", "bar-annotations")
-      .data(data)
-      .enter()
-      .append("rect")
-        .attr("x", function (d) {
-            return x(d.month);
-        })
-        .attr("y", function (d) {
-            return y(d.rides);
-        })
-        .attr("width", x.bandwidth())
-        .attr("height", function (d) {
-            return height - y(d.rides);
-        })
-        .attr("fill", "#A8A8A8");
+    // // add bar chart
+    // const barChart = svg2
+    //   .selectAll("mybar")
+    //   // .attr("class", "bar-annotations")
+    //   .data(monthAvgData)
+    //   .enter()
+    //   .append("rect")
+    //     .attr("x", function (d) {
+    //         return x(d.month);
+    //     })
+    //     .attr("y", function (d) {
+    //         return y(d.rides);
+    //     })
+    //     .attr("width", x.bandwidth())
+    //     .attr("height", function (d) {
+    //         return height - y(d.rides);
+    //     })
+    //     .attr("fill", "#706251DF")
+    //     .attr("stroke", "#24201b")
+    //     .attr("stroke-width", "1");
 
-    line1 = svg2
-      .append("line")
-      .attr("x1", x("Jun") + x.bandwidth() * 0.1)
-      .attr("y1", 0)
-      .attr("x2", x("Jun") + x.bandwidth() * 0.1)
-      .attr("y2", height)
-      .style("stroke-width", "2")
-      .attr("stroke", "#e32061");
+    // line1 = svg2
+    //   .append("line")
+    //   .attr("x1", x("Jun 20") + x.bandwidth() * 0.1)
+    //   .attr("y1", 0)
+    //   .attr("x2", x("Jun 20") + x.bandwidth() * 0.1)
+    //   .attr("y2", height)
+    //   .style("stroke-width", "2")
+    //   .attr("stroke", "#f0a84a");
 
-    line2 = svg2
-      .append("line")
-      .attr("x1", x("Mar") + x.bandwidth() * 0.9)
-      .attr("y1", 0)
-      .attr("x2", x("Mar") + x.bandwidth() * 0.9)
-      .attr("y2", height)
-      .style("stroke-width", "2")
-      .attr("stroke", "#e32061");
+    // line2 = svg2
+    //   .append("line")
+    //   .attr("x1", x("Mar 20") + x.bandwidth() * 0.9)
+    //   .attr("y1", 0)
+    //   .attr("x2", x("Mar 20") + x.bandwidth() * 0.9)
+    //   .attr("y2", height)
+    //   .style("stroke-width", "2")
+    //   .attr("stroke", "#f0a84a");
 
-    label1 = svg2
-      .append("text")
-      .attr("x", x("Mar") + x.bandwidth() * 0.9)
-      .attr("y", -10)
-      .attr("text-anchor", "middle")
-      .attr("fill", "#f71b65")
-      .style("font-size", "10px")
-      .text("Lockdown starts");
+    // label1 = svg2
+    //   .append("text")
+    //   .attr("x", x("Mar 20") + x.bandwidth() * 0.9)
+    //   .attr("y", 10)
+    //   .attr("text-anchor", "middle")
+    //   .attr("fill", "#f71b65")
+    //   .style("font-size", "10px")
+    //   .text("Lockdown starts");
 
-    label2 = svg2
-      .append("text")
-      .attr("x", x("Jun") + x.bandwidth() * 0.1)
-      .attr("y", -10)
-      .attr("text-anchor", "middle")
-      .attr("fill", "#f71b65")
-      .style("font-size", "10px")
-      .text("Lockdown lifted");
+    // label2 = svg2
+    //   .append("text")
+    //   .attr("x", x("Jun 20") + x.bandwidth() * 0.1)
+    //   .attr("y", 10)
+    //   .attr("text-anchor", "middle")
+    //   .attr("fill", "#f71b65")
+    //   .style("font-size", "10px")
+    //   .text("Lockdown lifted");
 
-    rect1 = svg2.append("rect");
-    rect2 = svg2.append("rect");
+    // rect1 = svg2.append("rect");
+    // rect2 = svg2.append("rect");
 }
 
 // function zoomBackIn() {
@@ -345,7 +650,7 @@ function removeBarsAndDrawMap() {
         .attr(
           "xlink:href",
           ([x, y, z]) =>
-            `https://tiles.stadiamaps.com/tiles/stamen_toner_lite/${z}/${x}/${y}${
+            `https://tiles.stadiamaps.com/tiles/stamen_toner/${z}/${x}/${y}${
               devicePixelRatio > 1 ? "@2x" : ""
             }.png`
         )

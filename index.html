@@ -71,7 +71,9 @@
             <div id="route"></div>
         </figure>
         <section class="filler">
-            <p>Scroll</p>
+            <img src="train.jpg"/>
+            <p style="color:black; width: 50%; font-size: 20px; margin-left: 25%; margin-top: 5%; margin-bottom: 0;">This story is entirely based on the story <a href="https://projects.two-n.com/mta/?utm=website#section-map-16">MTA Ridership Changes due to COVID-19</a> done by Aucher Serr and Two-N, all credit to them! I thought it was a brilliant premise and something to attempt replicating as a project for a data visualization design methods class. This story instead focuses on my city and public transportation system of interest: Chicago and the CTA.</p>
+            <p style="color:black; width: 50%; font-size: 20px; margin-left: 25%; margin-bottom: 5%;">The pandemic has completely reshaped the infrastructuer of daily communal life in so many ways. The mass movement of an imagination-defying amount of tasks online feels like one of the most ubiquitous changes. This is, in many ways, huge for accessibility--that initial promise of the Internet.</p>
         </section>
 
         <div class="scrolly">
@@ -85,7 +87,7 @@
           <!--  step text   -->
           <article>
             <div class="step" data-width="10%" data-index="0">
-              <p>Bar is 10%</p>
+              <p>Let's look at ridership as a whole. Every bar represents a month from January 2020 through to October 2023, the most recent <a>data</a> published by the City of Chicago.</p>
             </div>
             <div class="step" data-width="90%" data-index="1">
               <p>Bar is 90%</p>
@@ -118,6 +120,7 @@
       function init1() {
         Stickyfill.add(d3.select(".sticky").node());
         initializeRoute();
+        drawBarGraphBackground();
         
         enterView({
           selector: stepSel1.nodes(),
@@ -129,7 +132,7 @@
             if (index === 0) {
                 console.log("hey")
   
-                drawPandemicBars();
+               
             } else if (index === 1) {
        
             } else if (index === 2) {
