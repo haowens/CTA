@@ -131,10 +131,9 @@
             stepSel1.classed("is-active", (d, i) => i === index);
             if (index === 0) {
                 console.log("hey")
-  
-               
+                
             } else if (index === 1) {
-       
+                addBarChart()
             } else if (index === 2) {
                 removeBarsAndDrawMap()
             }
@@ -143,7 +142,10 @@
             let index = +d3.select(el).attr("data-index");
             index = Math.max(0, index - 1);
             if (index === 0) {
-    
+                removeBarChart()
+      
+            } else if (index === 1) {
+      
             }
             stepSel1.classed("is-active", (d, i) => i === index);
           },

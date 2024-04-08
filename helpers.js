@@ -400,7 +400,6 @@ function initializeRoute() {
 
 // bar graph functions
 function drawBarGraphBackground() {
-    console.log("yo")
     let margin = { top: 5, right: 0, bottom: 157, left: 0 },
       width = window.innerWidth - margin.left - margin.right,
       height = window.innerHeight - margin.top - margin.bottom;
@@ -441,50 +440,57 @@ function drawBarGraphBackground() {
       .attr("height", height)
       .style("fill", "#2b2b2b90");
     
-    svg2.append("text") // Append text for the label
-      .attr("x", width *(12/46)-50) // Set x position of the text
-      .attr("y", height / 12) // Set y position of the text
-      .attr("fill", "#878787") // Set text color
-      .attr("text-anchor", "middle") // Set text anchor to middle
-      .attr("alignment-baseline", "middle") // Set alignment baseline to middle
-      .style("font-size", "xx-large") // Set font size
+    svg2.append("text") 
+      .attr("x", width *(12/46)-50)
+      .attr("y", height / 12)
+      .attr("fill", "#878787")
+      .attr("text-anchor", "middle")
+      .attr("alignment-baseline", "middle") 
+      .style("font-size", "xx-large")
       .attr("font-family", "Helvetica")
       .attr("font-weight", "700")
-      .text("2020"); // Set the text content;
+      .text("2020"); 
 
-    svg2.append("text") // Append text for the label
-      .attr("x", width *(24/ 46)-50) // Set x position of the text
-      .attr("y", height / 12) // Set y position of the text
-      .attr("fill", "#878787") // Set text color
-      .attr("text-anchor", "middle") // Set text anchor to middle
-      .attr("alignment-baseline", "middle") // Set alignment baseline to middle
-      .style("font-size", "xx-large") // Set font size
+    svg2.append("text") 
+      .attr("x", width *(24/ 46)-50) 
+      .attr("y", height / 12)
+      .attr("fill", "#878787") 
+      .attr("text-anchor", "middle") 
+      .attr("alignment-baseline", "middle") 
+      .style("font-size", "xx-large")
       .attr("font-family", "Helvetica")
       .attr("font-weight", "700")
-      .text("2021"); // Set the text content;
+      .text("2021");
 
-    svg2.append("text") // Append text for the label
-      .attr("x", width *(36/ 46)-50 )// Set x position of the text
-      .attr("y", height / 12) // Set y position of the text
-      .attr("fill", "#878787") // Set text color
-      .attr("text-anchor", "middle") // Set text anchor to middle
-      .attr("alignment-baseline", "middle") // Set alignment baseline to middle
-      .style("font-size", "xx-large") // Set font size
+    svg2.append("text") 
+      .attr("x", width *(36/ 46)-50 )
+      .attr("y", height / 12) 
+      .attr("fill", "#878787")
+      .attr("text-anchor", "middle") 
+      .attr("alignment-baseline", "middle") 
+      .style("font-size", "xx-large") 
       .attr("font-family", "Helvetica")
       .attr("font-weight", "700")
-      .text("2022"); // Set the text content;
+      .text("2022"); 
 
-    svg2.append("text") // Append text for the label
-      .attr("x", width *(46/ 46) - 50 )// Set x position of the text
-      .attr("y", height / 12) // Set y position of the text
-      .attr("fill", "#878787") // Set text color
-      .attr("text-anchor", "middle") // Set text anchor to middle
-      .attr("alignment-baseline", "middle") // Set alignment baseline to middle
-      .style("font-size", "xx-large") // Set font size
+    svg2.append("text") 
+      .attr("x", width *(46/ 46) - 50 )
+      .attr("y", height / 12) 
+      .attr("fill", "#878787") 
+      .attr("text-anchor", "middle") 
+      .attr("alignment-baseline", "middle") 
+      .style("font-size", "xx-large")
       .attr("font-family", "Helvetica")
       .attr("font-weight", "700")
-      .text("2023"); // Set the text content;
+      .text("2023"); 
 
+   
+}
+
+function addBarChart() {
+    let margin = { top: 5, right: 0, bottom: 157, left: 0 },
+      width = window.innerWidth - margin.left - margin.right,
+      height = window.innerHeight - margin.top - margin.bottom;
 
     var x = d3
       .scaleBand()
@@ -515,65 +521,64 @@ function drawBarGraphBackground() {
     // Add Y axis (hidden b/c black)
     svg2.append("g").call(d3.axisLeft(y)).selectAll("text").attr("fill", "white");
 
-    // // add bar chart
-    // const barChart = svg2
-    //   .selectAll("mybar")
-    //   // .attr("class", "bar-annotations")
-    //   .data(monthAvgData)
-    //   .enter()
-    //   .append("rect")
-    //     .attr("x", function (d) {
-    //         return x(d.month);
-    //     })
-    //     .attr("y", function (d) {
-    //         return y(d.rides);
-    //     })
-    //     .attr("width", x.bandwidth())
-    //     .attr("height", function (d) {
-    //         return height - y(d.rides);
-    //     })
-    //     .attr("fill", "#706251DF")
-    //     .attr("stroke", "#24201b")
-    //     .attr("stroke-width", "1");
+      // add bar chart
+    const barChart = svg2
+      .selectAll("mybar")
+      .data(monthAvgData)
+      .enter()
+      .append("rect")
+        .attr("x", function (d) {
+            return x(d.month);
+        })
+        .attr("y", function (d) {
+            return y(d.rides);
+        })
+        .attr("width", x.bandwidth())
+        .attr("height", function (d) {
+            return height - y(d.rides);
+        })
+        .attr("class", "bar-annotations")
+        .attr("fill", "#574f44DF")
+        .attr("stroke", "#2e2a25")
+        .attr("stroke-width", "1");
 
-    // line1 = svg2
-    //   .append("line")
-    //   .attr("x1", x("Jun 20") + x.bandwidth() * 0.1)
-    //   .attr("y1", 0)
-    //   .attr("x2", x("Jun 20") + x.bandwidth() * 0.1)
-    //   .attr("y2", height)
-    //   .style("stroke-width", "2")
-    //   .attr("stroke", "#f0a84a");
+    line1 = svg2
+      .append("line")
+      .attr("x1", x("Jun 20") + x.bandwidth() * 0.1)
+      .attr("y1", 0)
+      .attr("x2", x("Jun 20") + x.bandwidth() * 0.1)
+      .attr("y2", height)
+      .attr("class", "bar-annotations")
+      .style("stroke-width", "3")
+      .attr("stroke", "#f0a84aDF");
 
-    // line2 = svg2
-    //   .append("line")
-    //   .attr("x1", x("Mar 20") + x.bandwidth() * 0.9)
-    //   .attr("y1", 0)
-    //   .attr("x2", x("Mar 20") + x.bandwidth() * 0.9)
-    //   .attr("y2", height)
-    //   .style("stroke-width", "2")
-    //   .attr("stroke", "#f0a84a");
+    line2 = svg2
+      .append("line")
+      .attr("x1", x("Mar 20") + x.bandwidth() * 0.9)
+      .attr("y1", 0)
+      .attr("x2", x("Mar 20") + x.bandwidth() * 0.9)
+      .attr("y2", height)
+      .attr("class", "bar-annotations")
+      .style("stroke-width", "3")
+      .attr("stroke", "#f0a84aDF");
 
-    // label1 = svg2
-    //   .append("text")
-    //   .attr("x", x("Mar 20") + x.bandwidth() * 0.9)
-    //   .attr("y", 10)
-    //   .attr("text-anchor", "middle")
-    //   .attr("fill", "#f71b65")
-    //   .style("font-size", "10px")
-    //   .text("Lockdown starts");
+    line2 = svg2
+      .append("line")
+      .attr("x1", x("May 23") + x.bandwidth() * 0.33)
+      .attr("y1", 0)
+      .attr("x2", x("May 23") + x.bandwidth() * 0.33)
+      .attr("y2", height)
+      .attr("class", "bar-annotations")
+      .style("stroke-width", "3")
+      .attr("stroke", "#f0a84aDF");
 
-    // label2 = svg2
-    //   .append("text")
-    //   .attr("x", x("Jun 20") + x.bandwidth() * 0.1)
-    //   .attr("y", 10)
-    //   .attr("text-anchor", "middle")
-    //   .attr("fill", "#f71b65")
-    //   .style("font-size", "10px")
-    //   .text("Lockdown lifted");
+    rect1 = svg2.append("rect");
+    rect2 = svg2.append("rect");
+}
 
-    // rect1 = svg2.append("rect");
-    // rect2 = svg2.append("rect");
+function removeBarChart() {
+  svg2.selectAll(".bar-annotations").remove();
+
 }
 
 // function zoomBackIn() {
