@@ -31,70 +31,6 @@ body {
     flex-direction: column;
   }
 
-  #scrolly-side {
-    border: 1px solid pink;
-  }
-
-  /* Styles for #scrolly-side .scrolly */
-  #scrolly-side .scrolly {
-    display: flex;
-    /* max-width: 60rem; */
-    width: 90%;
-    margin: 3rem auto;
-    /* background-color: var(--off-white); */
-    padding: 1rem;
-  }
-  
-  #scrolly-side .scrolly > * {
-    /* flex: 1; */
-  }
-  
-  #scrolly-side .scrolly article {
-    padding-right: 1rem;
-    display: flex;
-    flex-direction: column;
-    width:20%;
-    /* max-width: 30rem; */
-    justify-content: center;
-    align-items: center;
-  }
-  
-  #scrolly-side .scrolly article .step {
-    min-height: 100vh;
-    width: 100%;
-    margin-bottom: 1rem;
-    /* background-color: var(--gray-dark); */
-    transition: background-color 250ms ease-in-out;
-    border: 1px solid red;
-  }
-  
-  #scrolly-side .scrolly article .step:last-of-type {
-    margin-bottom: 0;
-  }
-  
-  #scrolly-side .scrolly article .step.is-active {
-    background-color: var(--secondary);
-  }
-  
-  #scrolly-side .scrolly article .step p {
-    margin: 0;
-    padding: 1rem;
-    text-align: center;
-    font-weight: 400;
-    color: var(--off-white);
-  }
-  
-  /* #scrolly-side .scrolly figure.sticky {
-    position: sticky;
-    width: 90%;
-    height: 70vh;
-    margin: 0;
-    top: 25vh;
-    left: 0;
-    border: 1px solid purple;
-    z-index: 5;
-  } */
-
   figure.sticky {
     position: sticky;
     width: 100vw;
@@ -171,8 +107,8 @@ body {
 
 #scrolly-overlay .scrolly article .step {
     height: 120vh;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 30%;
+    margin-right: 30%;
     margin-bottom: 1rem;
 }
 
@@ -181,8 +117,8 @@ body {
 }
 
 #scrolly-overlay .scrolly article .step.is-active p {
-    background-color: #5f4e319d;
-    border: 1px solid orange;
+  /* background-color: #5f4e319d; */
+  border: 2px solid #dbc09aDF;
 }
 
 #scrolly-overlay .scrolly article .step p {
