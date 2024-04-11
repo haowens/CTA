@@ -110,6 +110,7 @@ body {
     margin-left: 30%;
     margin-right: 30%;
     margin-bottom: 1rem;
+    
 }
 
 #scrolly-overlay .scrolly article .step:last-of-type {
@@ -118,11 +119,11 @@ body {
 
 #scrolly-overlay .scrolly article .step.is-active p {
   /* background-color: #5f4e319d; */
-  border: 2px solid #dbc09aDF;
+  border: 2px solid #827665df;
 }
 
 #scrolly-overlay .scrolly article .step p {
-    margin: 0;
+    margin: 1rem;
     padding: 1rem;
     text-align: left;
     font-weight: 400;

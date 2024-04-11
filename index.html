@@ -120,13 +120,49 @@
               <p>Each bar represents a month.</p>
             </div>
             <div class="step" data-width="50%" data-index="2">
-              <p>Chicago was officially on lockdown from Mar ___ to Jun ____</p>
+              <p>
+                Chicago was officially on lockdown in 2020 from
+                <span
+                  style="color: #d9a74c; font-weight: 600; font-size: xx-large"
+                  >March 26th</span
+                >
+                to
+                <span
+                  style="color: #d9a74c; font-weight: 600; font-size: xx-large"
+                  >Jun 3rd</span
+                >
+              </p>
             </div>
             <div class="step" data-width="50%" data-index="3">
-              <p>The COVID state of emergency was officially ended on ___</p>
+              <p>
+                The COVID state of emergency was officially ended on
+                <span
+                  style="color: #dbc09a; font-weight: 600; font-size: xx-large"
+                  >May 11th, 2023</span
+                >
+              </p>
             </div>
             <div class="step" data-width="50%" data-index="4">
-              <p>Lets compare averages</p>
+              <p>Let's compare averages of monthly riders</p>
+            </div>
+            <div class="step" data-width="50%" data-index="5">
+              <p>
+                <span
+                  style="color: #d9a74c; font-weight: 600; font-size: xx-large"
+                  >12.3%</span
+                >
+                of pre-pandemic ridership was maintained during lockdown.<br /><span
+                  style="color: #dbc09a; font-weight: 600; font-size: xx-large"
+                  >59.9%</span
+                >
+                of pre-pandemic ridership is active as of late 2023, after the
+                official end of the pandemic.
+              </p>
+            </div>
+            <div class="step" data-width="50%" data-index="6">
+              <p>
+                Now, let's look at things geographically.
+              </p>
             </div>
           </article>
         </div>
@@ -140,66 +176,69 @@
     <script src="helpers.js"></script>
 
     <script>
-        const container1 = d3.select("#scrolly-overlay");
-        const stepSel1 = container1.selectAll(".step");
+      const container1 = d3.select("#scrolly-overlay");
+      const stepSel1 = container1.selectAll(".step");
 
-        function updateChart1(index) {
-          const sel = container1.select(`[data-index='${index}']`);
-          const width = sel.attr("data-width");
-          stepSel1.classed("is-active", (d, i) => i === index);
-          container1.select(".bar-inner").style("width", width);
-        }
+      function updateChart1(index) {
+        const sel = container1.select(`[data-index='${index}']`);
+        const width = sel.attr("data-width");
+        stepSel1.classed("is-active", (d, i) => i === index);
+        container1.select(".bar-inner").style("width", width);
+      }
 
-        function init1() {
-          Stickyfill.add(d3.select(".sticky").node());
-          initializeRoute();
-          drawBarGraphBackground();
+      function init1() {
+        Stickyfill.add(d3.select(".sticky").node());
+        initializeRoute();
+        drawBarGraphBackground();
 
-          enterView({
-            selector: stepSel1.nodes(),
-            offset: 0.5,
-            enter: (el) => {
-              const index = +d3.select(el).attr("data-index");
-              console.log(index)
-              stepSel1.classed("is-active", (d, i) => i === index);
-              if (index === 0) {
-                  console.log("hey")
+        enterView({
+          selector: stepSel1.nodes(),
+          offset: 0.5,
+          enter: (el) => {
+            const index = +d3.select(el).attr("data-index");
+            console.log(index);
+            stepSel1.classed("is-active", (d, i) => i === index);
+            if (index === 0) {
+              console.log("hey");
+            } else if (index === 1) {
+              addBarChart();
+            } else if (index === 2) {
+              lockdownLines();
+              // removeBarsAndDrawMap()
+            } else if (index === 3) {
+              postLockdownLines();
+            } else if (index === 4) {
+              removeLabelsCompareAvgs();
+            } else if (index === 6) {
+              removeBarsAndDrawMap();
+            }
+          },
+          exit: (el) => {
+            let index = +d3.select(el).attr("data-index");
+            index = Math.max(0, index - 1);
+            if (index === 0) {
+              removeBarChart();
+            } else if (index === 1) {
+              removeLockdownLines();
+            } else if (index === 2) {
+              removePostLockdownLines();
+            } else if (index === 3) {
+              console.log("yo");
+              removeAvgs();
+              drawYearLabels();
+              addBarChart();
+              lockdownLines();
+              postLockdownLines();
+            } else if (index === 5) {
+              removeMapBacktoAvgs()
+            }
 
-              } else if (index === 1) {
-                  addBarChart()
-              } else if (index === 2) {
-                  lockdownLines()
-                  // removeBarsAndDrawMap()
-              } else if (index === 3) {
-                  postLockdownLines()
-              } else if (index === 4) {
-                  removeLabelsCompareAvgs();
-              }
-            },
-            exit: (el) => {
-              let index = +d3.select(el).attr("data-index");
-              index = Math.max(0, index - 1);
-              if (index === 0) {
-                removeBarChart()
-              } else if (index === 1) {
-                removeLockdownLines()
-              } else if (index === 2) {
-                removePostLockdownLines()
-              } else if (index === 3) {
-                console.log("yo")
-                removeAvgs()
-                drawYearLabels()
-                addBarChart()
-                lockdownLines()
-                postLockdownLines()
-              }
+            stepSel1.classed("is-active", (d, i) => i === index);
+          },
+        });
+      }
 
-              stepSel1.classed("is-active", (d, i) => i === index);
-            },
-          });
-        }
-
-        init1();
+      init1();
 
       //   const container2 = d3.select("#scrolly-overlay");
       //   const stepSel2 = container2.selectAll(".step");

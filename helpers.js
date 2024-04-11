@@ -277,11 +277,19 @@ const monthAvgData = [
   },
 ];
 
-const periodAvgs = {
-  prePanAvg: 554605.7,
-  lockDownAvg: 68266.4,
-  postAvg: 332504.24,
-};
+const periodAvgs = [
+  {
+    title: "pre-pandemic",
+    avg: 554605.7,
+    color: "#574f44",
+  },
+  {
+    title: "post-pandemic",
+    avg: 332504.24,
+    color: "#dbc09aD0",
+  },
+  { title: "lockdown", avg: 68266.4, color: "#d9a74cD0" },
+];
 
 // stores train tracks
 let svg;
@@ -406,7 +414,7 @@ function initializeRoute() {
 
 let svg2;
 
-let margin = { top: 5, right: 0, bottom: 157, left: 0 },
+let margin = { top: 5, right: 0, bottom: 170, left: 0 },
   width = window.innerWidth - margin.left - margin.right,
   height = window.innerHeight - margin.top - margin.bottom;
 
@@ -424,17 +432,18 @@ var x = d3
   )
   .padding(0.2);
 
+svg2 = d3
+  .select("#mainfig")
+  .append("svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+  .attr("transform", `translate(${margin.left},${margin.top})`);
+
 var y = d3.scaleLinear().domain([0, maxRides]).range([height, 0]);
 
 // bar graph functions
 function drawBarGraphBackground() {
-  svg2 = d3
-    .select("#mainfig")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", `translate(${margin.left},${margin.top})`);
 
   svg2
     .append("rect")
@@ -534,7 +543,7 @@ function addBarChart() {
     .style("text-anchor", "center")
     .style("font-size", "14px")
     .style("font-weight", "bold")
-    .attr("fill", "white");
+    .attr("fill", "black");
 
   // Add Y axis (hidden b/c black)
   svg2.append("g").call(d3.axisLeft(y)).selectAll("text").attr("fill", "white");
@@ -687,51 +696,44 @@ function removeLabelsCompareAvgs() {
   // line1.transition().duration(1000).attr("visibility", "hidden");
   // line2.transition().duration(1000).attr("visibility", "hidden");
 
-  svg2
-    .append("rect")
-    .attr("x", width * (2 / 5))
-    .attr("y", y(periodAvgs.prePanAvg))
-    .attr("width", width / 5)
-    .attr("height", height - y(periodAvgs.prePanAvg))
-    .attr("class", "avg-box")
-    .attr("fill", "#574f44DF")
-    .attr("stroke", "#2e2a25")
-    .attr("stroke-width", "1");
+  periodAvgs.forEach((item) => {
+    svg2
+      .append("rect")
+      .attr("x", width * (1.75 / 5))
+      .attr("y", y(item.avg))
+      .attr("width", width / 5)
+      .attr("height", height - y(item.avg))
+      .attr("class", "avg-box")
+      .attr("fill", item.color)
+      .attr("stroke", "#2e2a25")
+      .attr("stroke-width", "1");
 
-  svg2
-    .append("rect")
-    .attr("x", width * (2 / 5))
-    .attr("y", y(periodAvgs.postAvg))
-    .attr("width", width / 5)
-    .attr("height", height - y(periodAvgs.postAvg) - 70)
-    .attr("class", "avg-box")
-    .attr("fill", "#dbc09a")
-    .attr("stroke", "#2e2a25")
-    .attr("stroke-width", "1");
+    svg2
+      .append("text")
+      .attr("x", (width * 2.8) / 5)
+      .attr("y", y(item.avg) + 25)
+      .attr("fill", "#878787")
+      .attr("class", "avg-box")
+      // .attr("text-anchor", "middle")
+      // .attr("alignment-baseline", "middle")
+      .style("font-size", "large")
+      .attr("font-family", "Helvetica")
+      .attr("font-weight", "700")
+      .text(item.title);
 
-  svg2
-    .append("rect")
-    .attr("x", width * (2 / 5))
-    .attr("y", y(periodAvgs.lockDownAvg))
-    .attr("width", width / 5)
-    .attr("height", height - y(periodAvgs.lockDownAvg))
-    .attr("class", "avg-box")
-    .attr("fill", "#d9a74c")
-    .attr("stroke", "#2e2a25")
-    .attr("stroke-width", "1");
-
-  svg2
-    .append("text")
-    .attr("x", width * (3/5))
-    .attr("y", height / 12)
-    .attr("fill", "#878787")
-    .attr("class", "year-label")
-    .attr("text-anchor", "middle")
-    .attr("alignment-baseline", "middle")
-    .style("font-size", "xx-large")
-    .attr("font-family", "Helvetica")
-    .attr("font-weight", "700")
-    .text("2020");
+    svg2
+      .append("text")
+      .attr("x", (width * 2.8) / 5)
+      .attr("y", y(item.avg) + 50)
+      .attr("fill", item.color)
+      .attr("class", "avg-box")
+      // .attr("text-anchor", "middle")
+      // .attr("alignment-baseline", "middle")
+      .style("font-size", "medium")
+      .attr("font-family", "Helvetica")
+      .attr("font-weight", "400")
+      .text(item.avg);
+  });
 
   // rect1
   //   .transition()
@@ -754,31 +756,17 @@ function removeAvgs() {
   svg2.selectAll(".avg-box").remove();
 }
 
-// function zoomBackIn() {
-
-// }
-
-// function zoomOutAllBars() {
-
-// }
-
-// function backToAllBars() {
-
-// }
-
-// function proportionOverlay() {
-
-// }
-
-// dot lines functions
-
-// map functions
-
-// dots on graph functions
+function removeMapBacktoAvgs() {
+  svg2.selectAll("*").remove();
+  margin = { top: 5, right: 0, bottom: 170, left: 0 },
+    width = window.innerWidth - margin.left - margin.right,
+    height = window.innerHeight - margin.top - margin.bottom;
+  drawBarGraphBackground();
+  removeLabelsCompareAvgs();
+}
 
 function removeBarsAndDrawMap() {
   console.log("here");
-  d3.select("#svg2").selectAll("*").remove();
   svg2.transition().duration(1000).selectAll("*").remove();
 
   (margin = { top: 50, right: 25, bottom: 45, left: 0 }),
