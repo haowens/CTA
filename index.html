@@ -160,9 +160,20 @@
               </p>
             </div>
             <div class="step" data-width="50%" data-index="6">
+              <p>Now, let's look at things geographically.</p>
+            </div>
+            <div class="step" data-width="50%" data-index="7">
               <p>
-                Now, let's look at things geographically.
+                Let's look at ridership relative to before the pandemic as
+                recorded during
+                <span
+                  style="color: #d9a74c; font-weight: 600; font-size: xx-large"
+                  > lockdown</span
+                >.
               </p>
+            </div>
+            <div class="step" data-width="50%" data-index="8">
+              <p>How does this break down by neighborhoods?</p>
             </div>
           </article>
         </div>
@@ -211,6 +222,10 @@
               removeLabelsCompareAvgs();
             } else if (index === 6) {
               removeBarsAndDrawMap();
+            } else if (index === 7) {
+              lockdownColors()
+            } else if (index === 8) {
+              drawNeighborhoods()
             }
           },
           exit: (el) => {
@@ -223,14 +238,15 @@
             } else if (index === 2) {
               removePostLockdownLines();
             } else if (index === 3) {
-              console.log("yo");
               removeAvgs();
               drawYearLabels();
               addBarChart();
               lockdownLines();
               postLockdownLines();
             } else if (index === 5) {
-              removeMapBacktoAvgs()
+              removeMapBacktoAvgs();
+            } else if (index === 6) {
+              undoColor();
             }
 
             stepSel1.classed("is-active", (d, i) => i === index);

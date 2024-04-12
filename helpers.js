@@ -444,7 +444,6 @@ var y = d3.scaleLinear().domain([0, maxRides]).range([height, 0]);
 
 // bar graph functions
 function drawBarGraphBackground() {
-
   svg2
     .append("rect")
     .attr("x", 0)
@@ -758,16 +757,17 @@ function removeAvgs() {
 
 function removeMapBacktoAvgs() {
   svg2.selectAll("*").remove();
-  margin = { top: 5, right: 0, bottom: 170, left: 0 },
-    width = window.innerWidth - margin.left - margin.right,
-    height = window.innerHeight - margin.top - margin.bottom;
+  (margin = { top: 5, right: 0, bottom: 170, left: 0 }),
+    (width = window.innerWidth - margin.left - margin.right),
+    (height = window.innerHeight - margin.top - margin.bottom);
   drawBarGraphBackground();
   removeLabelsCompareAvgs();
 }
 
+let circles;
+
 function removeBarsAndDrawMap() {
-  console.log("here");
-  svg2.transition().duration(1000).selectAll("*").remove();
+  svg2.transition().duration(200).selectAll("*").remove();
 
   (margin = { top: 50, right: 25, bottom: 45, left: 0 }),
     (width = 650 - margin.left - margin.right),
@@ -776,57 +776,152 @@ function removeBarsAndDrawMap() {
   // append the svg object to the body of the page
   const mapWidth = 650; // Define width of the map
   const mapHeight = 620; // Define height of the map
+  d3.csv("data.csv").then(function (data) {
+    svg2
+      .append("svg")
+      .attr("viewBox", `0 0 ${width} ${height}`)
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .style("border", "2px solid black")
+      .append("g");
 
-  svg2
-    .append("svg")
-    .attr("viewBox", `0 0 ${width} ${height}`)
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .style("border", "2px solid black")
-    .append("g");
+    // Define projection
+    const projection = d3
+      .geoMercator()
+      .center([-87.6298, 41.8781])
+      .scale(Math.pow(2, 19) / (2 * Math.PI))
+      .translate([mapWidth / 1.5, mapHeight / 2]);
 
-  // Define projection
-  const projection = d3
-    .geoMercator()
-    .center([-87.6298, 41.8781])
-    .scale(Math.pow(2, 19) / (2 * Math.PI))
-    .translate([mapWidth / 1.5, mapHeight / 2]);
+    // Define path generator
+    const path = d3.geoPath(projection);
 
-  // Define path generator
-  const path = d3.geoPath(projection);
+    console.log(path);
 
-  console.log(path);
+    // Define tile function
+    const tile = d3
+      .tile()
+      .size([mapWidth, mapHeight])
+      .scale(projection.scale() * 2 * Math.PI)
+      .translate(projection([0, 0]));
 
-  // Define tile function
-  const tile = d3
-    .tile()
-    .size([mapWidth, mapHeight])
-    .scale(projection.scale() * 2 * Math.PI)
-    .translate(projection([0, 0]));
+    // Generate tiles
+    const tiles = tile();
 
-  // Generate tiles
-  const tiles = tile();
+    // Render tiles
+    const map = svg2
+      .selectAll("image")
+      .data(tiles)
+      .enter()
+      .append("image")
+      .attr(
+        "xlink:href",
+        ([x, y, z]) =>
+          `https://tiles.stadiamaps.com/tiles/stamen_toner/${z}/${x}/${y}${
+            devicePixelRatio > 1 ? "@2x" : ""
+          }.png`
+      )
+      .attr("x", ([x, y, z]) =>
+        Math.round((x + tiles.translate[0]) * tiles.scale)
+      )
+      .attr("y", ([x, y, z]) =>
+        Math.round((y + tiles.translate[1]) * tiles.scale)
+      )
+      .attr("width", tiles.scale)
+      .attr("height", tiles.scale)
+      .style("border", "2px solid black");
 
-  // Render tiles
-  const map = svg2
-    .selectAll("image")
-    .data(tiles)
-    .enter()
-    .append("image")
-    .attr(
-      "xlink:href",
-      ([x, y, z]) =>
-        `https://tiles.stadiamaps.com/tiles/stamen_toner/${z}/${x}/${y}${
-          devicePixelRatio > 1 ? "@2x" : ""
-        }.png`
-    )
-    .attr("x", ([x, y, z]) =>
-      Math.round((x + tiles.translate[0]) * tiles.scale)
-    )
-    .attr("y", ([x, y, z]) =>
-      Math.round((y + tiles.translate[1]) * tiles.scale)
-    )
-    .attr("width", tiles.scale)
-    .attr("height", tiles.scale)
-    .style("border", "2px solid black");
+    //draw black dots here
+
+    data.forEach((d) => {
+      d["projectedPoint"] = projection([d["long"], d["lat"]]);
+    });
+
+    circles = svg2
+      .selectAll(".station-circle")
+      .data(data)
+      .enter()
+      .append("circle")
+      .attr("class", "station-circle")
+      .attr("r", 5)
+      .attr("cx", function (d) {
+        return d["projectedPoint"][0];
+      })
+      .attr("cy", function (d) {
+        return d["projectedPoint"][1];
+      })
+      .style("stroke", "white")
+      .attr("fill", "rgba(0,0,0,0.3)");
+
+    var lineGenerator = d3
+      .line()
+      .x(function (d) {
+        return d["projectedPoint"][0];
+      })
+      .y(function (d) {
+        return d["projectedPoint"][1];
+      });
+
+    // Append a path
+    // svg
+    //   .append("path")
+    //   .datum(data)
+    //   .attr("d", lineGenerator)
+    //   .style("fill", "none")
+    //   .style("stroke", "blue"); // Adjust stroke color as needed
+  });
+}
+
+function lockdownColors() {
+  d3.csv("data.csv").then(function (data) {
+    var color = d3
+      .scaleLinear()
+      .domain(d3.extent(data, (d) => d.lockdownRelativeAvg))
+      .range(["#4a3510", "#d9a74c"]);
+
+    circles.attr("fill", function (d) {
+      return color(d.lockdownRelativeAvg);
+    });
+  });
+}
+
+function undoColor() {
+  circles.style("stroke", "white").attr("fill", "rgba(0,0,0,0.3)");
+}
+
+function drawNeighborhoods() {
+  d3.json("neighborhoods.geojson").then(function (data) {
+    // Define width and height of the map
+    const mapWidth = 650;
+    const mapHeight = 620;
+
+    // Define projection for the map
+    const projection = d3
+      .geoMercator()
+      .center([-87.6298, 41.8781])
+      .scale(Math.pow(2, 19) / (2 * Math.PI))
+      .translate([mapWidth / 1.5, mapHeight / 2]);
+
+    // Define path generator for the map
+    const path = d3.geoPath(projection);
+
+    const colorScale = d3.scaleLinear()
+      .domain(d3.extent(data.features, d => d.properties.lockdownRelativeAvg))
+      .range(["#4a3510", "#d9a74c"]); 
+
+    // Append SVG elements for each neighborhood boundary
+    svg2
+      .selectAll(".neighborhood-path")
+      .data(data.features)
+      .enter()
+      .append("path")
+      .attr("class", "neighborhood-path")
+      .attr("d", path) // Use the path generator
+      .attr("fill", d => colorScale(d.properties.lockdownRelativeAvg))
+      .attr("opacity", "0.5")
+      .attr("stroke", "orange")
+      .attr("stroke-width", 2);
+
+    // Ensure neighborhood boundaries appear above the map tiles
+    svg2.selectAll(".station-circle").raise();
+  });
 }
