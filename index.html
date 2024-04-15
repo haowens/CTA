@@ -22,8 +22,9 @@
 
     <!-- boilerplate.css -->
 
+    <script src="https://d3js.org/d3.v6.js"></script>
     <script src="https://unpkg.com/enter-view"></script>
-    <script src="https://unpkg.com/d3@5.4.0/dist/d3.min.js"></script>
+    <!-- <script src="https://unpkg.com/d3@5.4.0/dist/d3.min.js"></script> -->
     <script src="https://unpkg.com/stickyfilljs@2.0.5/dist/stickyfill.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3-tile@1"></script>
   </head>
@@ -173,7 +174,23 @@
               </p>
             </div>
             <div class="step" data-width="50%" data-index="8">
-              <p>How does this break down by neighborhoods?</p>
+              <p>How does this break down by neighborhood?</p>
+            </div>
+            <div class="step" data-width="50%" data-index="9">
+              <p>There seems to be a significant correlation between the neighborhoods income and their relative ridership during lockdown. </p>
+            </div>
+            <div class="step" data-width="50%" data-index="10">
+              <p>Now let's reset, and look at the <span
+                style="color: #dbc09a; font-weight: 600; font-size: xx-large">post-pandemic</span> ridership breakdown geographically.</p>
+            </div>
+            <div class="step" data-width="50%" data-index="11">
+              <p>Here is the breakdown by neighborhood of the last few months of 2023 relative to the pre-pandemic averages of those same months.</p>
+            </div>
+            <div class="step" data-width="50%" data-index="12">
+              <p>Let's compare it to our lockdown graph.</p>
+            </div>
+            <div class="step" data-width="50%" data-index="13">
+              <p>Let's look at this a different way.</p>
             </div>
           </article>
         </div>
@@ -189,13 +206,7 @@
     <script>
       const container1 = d3.select("#scrolly-overlay");
       const stepSel1 = container1.selectAll(".step");
-
-      function updateChart1(index) {
-        const sel = container1.select(`[data-index='${index}']`);
-        const width = sel.attr("data-width");
-        stepSel1.classed("is-active", (d, i) => i === index);
-        container1.select(".bar-inner").style("width", width);
-      }
+      
 
       function init1() {
         Stickyfill.add(d3.select(".sticky").node());
@@ -224,8 +235,19 @@
               removeBarsAndDrawMap();
             } else if (index === 7) {
               lockdownColors()
+              drawGradient()
             } else if (index === 8) {
               drawNeighborhoods()
+            } else if (index === 10) {
+              removeNeighborhoods()
+              undoColor()
+            } else if (index === 11) {
+              postPanColors()
+              drawGradient()
+            } else if (index === 12) {
+              drawPostPanNeighborhoods()
+            } else if (index === 13) {
+              parallelScatter()
             }
           },
           exit: (el) => {
@@ -247,6 +269,20 @@
               removeMapBacktoAvgs();
             } else if (index === 6) {
               undoColor();
+            } else if (index === 7) {
+              removeNeighborhoods()
+            } else if (index === 9) {
+              drawNeighborhoods()
+              lockdownColors()
+              drawGradient()
+            } else if (index === 10) {
+              undoColor()
+            } else if (index === 11) {
+              removeNeighborhoods()
+            } else if (index === 12) {
+              removeBarsAndDrawMap()           
+              postPanColors()
+              drawPostPanNeighborhoods()
             }
 
             stepSel1.classed("is-active", (d, i) => i === index);
