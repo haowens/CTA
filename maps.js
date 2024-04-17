@@ -26,7 +26,7 @@ function removeBarsAndDrawMap() {
     const projection = d3
       .geoMercator()
       .center([-87.6298, 41.8781])
-      .scale(Math.pow(2, 19) / (2 * Math.PI))
+      .scale(Math.pow(2, 18.75) / (2 * Math.PI))
       .translate([mapWidth / 1.5, mapHeight / 2]);
 
     // Define path generator
@@ -144,7 +144,7 @@ function drawNeighborhoods() {
     const projection = d3
       .geoMercator()
       .center([-87.6298, 41.8781])
-      .scale(Math.pow(2, 19) / (2 * Math.PI))
+      .scale(Math.pow(2, 18.75) / (2 * Math.PI))
       .translate([mapWidth / 1.5, mapHeight / 2]);
 
     // Define path generator for the map
@@ -180,9 +180,8 @@ function drawNeighborhoods() {
     svg2.selectAll(".station-circle").raise();
 
     drawGradient(
-      d3.min(data.features, (d) => d.properties.lockdownRelativeAvg),
-      d3.max(data.features, (d) => d.properties.lockdownRelativeAvg)
-    );
+      0.04,0.34
+    )
   });
 }
 
@@ -205,15 +204,12 @@ function postPanColors() {
       }
     });
 
-    drawGradient(
-      d3.min(data, (d) => d.postPanRelativeAvg),
-      d3.max((d) => d.postPanRelativeAvg)
-    );
+    drawGradient(0.17, 0.92)
   });
 }
 
 function drawGradient(min, max) {
-    svg2.selectAll("#legend-gradient").remove()
+  svg2.selectAll("#legend-gradient").remove();
 
   let gradient = svg2
     .append("defs")
@@ -250,6 +246,7 @@ function drawGradient(min, max) {
     .attr("y", legendY - 5) // Adjust position based on your needs
     .attr("fill", "white")
     .attr("id", "legend-gradient")
+    .attr("text-anchor", "middle")
     .text(min);
 
   svg2
@@ -258,6 +255,7 @@ function drawGradient(min, max) {
     .attr("y", legendY - 5) // Adjust position based on your needs
     .attr("fill", "white")
     .attr("id", "legend-gradient")
+    .attr("text-anchor", "middle")
     .text(max);
 }
 
@@ -270,11 +268,16 @@ function drawPostPanNeighborhoods() {
     const mapWidth = 650;
     const mapHeight = 620;
 
+    svg2
+      .attr("width", width)
+      .attr("height", height)
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
     // Define projection for the map
     const projection = d3
       .geoMercator()
       .center([-87.6298, 41.8781])
-      .scale(Math.pow(2, 19) / (2 * Math.PI))
+      .scale(Math.pow(2, 18.75) / (2 * Math.PI))
       .translate([mapWidth / 1.5, mapHeight / 2]);
 
     // Define path generator for the map
@@ -308,9 +311,6 @@ function drawPostPanNeighborhoods() {
 
     // Ensure neighborhood boundaries appear above the map tiles
     svg2.selectAll(".station-circle").raise();
-    drawGradient(
-      d3.min(data.features, (d) => d.properties.postPanRelativeAvg),
-      d3.max((d) => d.properties.postPanRelativeAvg)
-    );
+    drawGradient(0.45, 0.84)
   });
 }

@@ -169,7 +169,8 @@
                 recorded during
                 <span
                   style="color: #d9a74c; font-weight: 600; font-size: xx-large"
-                  > lockdown</span
+                >
+                  lockdown</span
                 >.
               </p>
             </div>
@@ -177,20 +178,50 @@
               <p>How does this break down by neighborhood?</p>
             </div>
             <div class="step" data-width="50%" data-index="9">
-              <p>There seems to be a significant correlation between the neighborhoods income and their relative ridership during lockdown. </p>
+              <p>
+                There seems to be a significant correlation between the
+                neighborhoods income and their relative ridership during
+                lockdown.
+              </p>
             </div>
             <div class="step" data-width="50%" data-index="10">
-              <p>Now let's reset, and look at the <span
-                style="color: #dbc09a; font-weight: 600; font-size: xx-large">post-pandemic</span> ridership breakdown geographically.</p>
+              <p>
+                Now let's reset, and look at the
+                <span
+                  style="color: #dbc09a; font-weight: 600; font-size: xx-large"
+                  >post-pandemic</span
+                >
+                ridership breakdown geographically.
+              </p>
             </div>
             <div class="step" data-width="50%" data-index="11">
-              <p>Here is the breakdown by neighborhood of the last few months of 2023 relative to the pre-pandemic averages of those same months.</p>
+              <p>
+                Here is the breakdown by neighborhood of the last few months of
+                2023 relative to the pre-pandemic averages of those same months.
+              </p>
             </div>
             <div class="step" data-width="50%" data-index="12">
               <p>Let's compare it to our lockdown graph.</p>
             </div>
             <div class="step" data-width="50%" data-index="13">
-              <p>Let's look at this a different way.</p>
+              <p>
+                Let's look at this a different way. The colors of each line are
+                scaled by the per capita income of the neighborhood where the
+                stop is located.
+              </p>
+            </div>
+            <div class="step" data-width="50%" data-index="14">
+              <p>
+                The takeaway from this graph seems to mostly be that the drastic
+                shift in CTA ridership only really persisted during lockdown. As
+                you can see in the left half of the graph, the proportions of
+                ridership seems pretty consistent from pre-pandemic averages to
+                post-pandemic averages. As you can see from the right half of
+                the graph, there seems to be a dramatic color inversion where
+                the stops where the darker lines shoot up and then back down
+                only for the axis pertaining to relative ridership during
+                lockdown.
+              </p>
             </div>
           </article>
         </div>
@@ -210,7 +241,6 @@
     <script>
       const container1 = d3.select("#scrolly-overlay");
       const stepSel1 = container1.selectAll(".step");
-      
 
       function init1() {
         Stickyfill.add(d3.select(".sticky").node());
@@ -243,69 +273,70 @@
               removeBarsAndDrawMap();
             } else if (index === 7) {
               showStop(6);
-              lockdownColors()
+              lockdownColors();
             } else if (index === 8) {
               showStop(7);
-              drawNeighborhoods()
+              drawNeighborhoods();
             } else if (index === 10) {
               showStop(8);
-              removeNeighborhoods()
-              undoColor()
+              removeNeighborhoods();
+              undoColor();
             } else if (index === 11) {
               showStop(9);
-              postPanColors()
+              postPanColors();
             } else if (index === 12) {
               showStop(10);
-              drawPostPanNeighborhoods()
+              drawPostPanNeighborhoods();
             } else if (index === 13) {
-              showStop(11)
-              parallelScatter()
+              showStop(11);
+              parallelScatter();
             }
           },
           exit: (el) => {
             let index = +d3.select(el).attr("data-index");
             index = Math.max(0, index - 1);
             if (index === 0) {
-              showStop(0)
+              showStop(0);
               removeBarChart();
             } else if (index === 1) {
-              showStop(1)
+              showStop(1);
               removeLockdownLines();
             } else if (index === 2) {
-              showStop(2)
+              showStop(2);
               removePostLockdownLines();
             } else if (index === 3) {
-              showStop(3)
+              showStop(3);
               removeAvgs();
               drawYearLabels();
               addBarChart();
               lockdownLines();
               postLockdownLines();
             } else if (index === 5) {
-              showStop(4)
+              showStop(4);
               removeMapBacktoAvgs();
             } else if (index === 6) {
-              showStop(5)
+              showStop(5);
               undoColor();
             } else if (index === 7) {
-              showStop(6)
-              removeNeighborhoods()
+              showStop(6);
+              removeNeighborhoods();
               drawGradient(0.02, 0.42);
             } else if (index === 9) {
-              showStop(7)
-              drawNeighborhoods()
-              lockdownColors()
+              showStop(7);
+              drawNeighborhoods();
+              lockdownColors();
             } else if (index === 10) {
-              showStop(8)
-              undoColor()
+              showStop(8);
+              undoColor();
             } else if (index === 11) {
-              showStop(9)
-              removeNeighborhoods()
+              showStop(9);
+              removeNeighborhoods();
+              drawGradient(0.17, 0.92);
             } else if (index === 12) {
-              showStop(10)
-              removeBarsAndDrawMap()           
-              postPanColors()
-              // drawPostPanNeighborhoods()
+              showStop(10);
+              removeBarsAndDrawMap();
+              postPanColors();
+              drawPostPanNeighborhoods();
             }
 
             stepSel1.classed("is-active", (d, i) => i === index);

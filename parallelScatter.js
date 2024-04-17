@@ -1,21 +1,21 @@
 function parallelScatter() {
   svg2.selectAll("*").remove();
-  margin = { top: 40, right: 100, bottom: 150, left: 70 };
+  margin = { top: 90, right: 100, bottom: 150, left: 70 };
   width = window.innerWidth * (9 / 10);
-  height = 570;
+  height = 540;
 
   svg2
     .attr("width", width)
     .attr("height", height)
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
-//   svg2
-//     .append("rect")
-//     .attr("width", width)
-//     .attr("height", height)
-//     .attr("x", 0)
-//     .attr("y", 0)
-//     .attr("fill", "white");
+  svg2
+    .append("rect")
+    .attr("width", width)
+    .attr("height", "2px")
+    .attr("x", 0)
+    .attr("y", -24)
+    .attr("fill", "white");
 
   d3.csv("data.csv").then(function (data) {
     var x,
@@ -105,34 +105,94 @@ function parallelScatter() {
       .each(function (d) {
         d3.select(this)
           .call(d3.axisLeft().scale(y[d]))
-        //   .selectAll("label")
-        //   .attr("fill", "black")
+          //   .selectAll("label")
+          //   .attr("fill", "black")
           .selectAll("text")
           .style("font-family", '"Times New Roman", Times, serif')
           .style("fill", "white")
           .attr("font-size", "12")
+          .style("font-weight", 100)
           .attr("font-color", "white");
       })
       .append("text")
       .style("text-anchor", "middle")
       .attr("font-size", "12")
       .attr("fill", "white")
-      .attr("y", -16)
+      .style("font-weight", "bold")
+      .attr("y", -30)
       .text(function (d) {
         if (d === "prePanAvgRidership") {
-            return "pre-pan avg (2017-2019)"
+          return "pre-pan avg (2017-2019)";
         } else if (d === "JanFeb20AvgRidership") {
-            return "Jan-Feb 2020 avg"
+          return "Jan-Feb 2020 avg";
         } else if (d === "lockdownRelativeAvg") {
-            return "lockdown relative avg"
+          return "lockdown relative avg";
         } else if (d === "postPanRelativeAvg") {
-            return "post-pan relative avg"
+          return "post-pan relative avg";
         } else if (d === "postPanAvgRidership") {
-            return "post-pan avg"
+          return "post-pan avg";
         } else {
-            return
+          return;
         }
       })
       .style("font-family", "Helvetica");
-  });
-}
+
+    //   svg2.selectAll("#legend-gradient").remove();
+
+      let gradient = svg2
+        .append("defs")
+        .append("linearGradient")
+        .attr("id", "legend-gradient")
+        .attr("x1", "0%")
+        .attr("y1", "0%")
+        .attr("x2", "100%")
+        .attr("y2", "0%");
+
+      gradient
+        .append("stop")
+        .attr("offset", "0%")
+        .attr("stop-color", "#4a3510");
+
+      gradient
+        .append("stop")
+        .attr("offset", "100%")
+        .attr("stop-color", "#d9a74c");
+
+      lX = 0;
+      lY = -70;
+      legendWidth = window.innerWidth * (1 / 9);
+      legendHeight = window.innerHeight * (1 / 55);
+
+      svg2
+        .append("rect")
+        .attr("x", lX)
+        .attr("y", lY)
+        .attr("width", legendWidth)
+        .attr("height", legendHeight)
+        .attr("id", "legend-gradient")
+        .attr("stroke", "#878787")
+        .attr("stroke-width", "1px")
+        .style("fill", "url(#legend-gradient)");
+
+      svg2
+        .append("text")
+        .attr("x", lX)
+        .attr("y", lY - 5) // Adjust position based on your needs
+        .attr("fill", "white")
+        .attr("id", "legend-gradient")
+        .attr("text-anchor", "middle")
+        .attr("font-size", "12")
+        .text("$13,982");
+
+      svg2
+        .append("text")
+        .attr("x", legendWidth + lX)
+        .attr("y", lY - 5) // Adjust position based on your needs
+        .attr("fill", "white")
+        .attr("id", "legend-gradient")
+        .attr("text-anchor", "middle")
+        .attr("font-size", "12")
+        .text("$104,139");
+    })
+  };
+
