@@ -202,6 +202,10 @@
     </main>
 
     <script src="helpers.js"></script>
+    <script src="route.js"></script>
+    <script src="barGraph.js"></script>
+    <script src="maps.js"></script>
+    <script src="parallelScatter.js"></script>
 
     <script>
       const container1 = d3.select("#scrolly-overlay");
@@ -221,32 +225,40 @@
             console.log(index);
             stepSel1.classed("is-active", (d, i) => i === index);
             if (index === 0) {
-              console.log("hey");
             } else if (index === 1) {
+              showStop(1);
               addBarChart();
             } else if (index === 2) {
+              showStop(2);
               lockdownLines();
               // removeBarsAndDrawMap()
             } else if (index === 3) {
+              showStop(3);
               postLockdownLines();
             } else if (index === 4) {
+              showStop(4);
               removeLabelsCompareAvgs();
             } else if (index === 6) {
+              showStop(5);
               removeBarsAndDrawMap();
             } else if (index === 7) {
+              showStop(6);
               lockdownColors()
-              drawGradient()
             } else if (index === 8) {
+              showStop(7);
               drawNeighborhoods()
             } else if (index === 10) {
+              showStop(8);
               removeNeighborhoods()
               undoColor()
             } else if (index === 11) {
+              showStop(9);
               postPanColors()
-              drawGradient()
             } else if (index === 12) {
+              showStop(10);
               drawPostPanNeighborhoods()
             } else if (index === 13) {
+              showStop(11)
               parallelScatter()
             }
           },
@@ -254,35 +266,46 @@
             let index = +d3.select(el).attr("data-index");
             index = Math.max(0, index - 1);
             if (index === 0) {
+              showStop(0)
               removeBarChart();
             } else if (index === 1) {
+              showStop(1)
               removeLockdownLines();
             } else if (index === 2) {
+              showStop(2)
               removePostLockdownLines();
             } else if (index === 3) {
+              showStop(3)
               removeAvgs();
               drawYearLabels();
               addBarChart();
               lockdownLines();
               postLockdownLines();
             } else if (index === 5) {
+              showStop(4)
               removeMapBacktoAvgs();
             } else if (index === 6) {
+              showStop(5)
               undoColor();
             } else if (index === 7) {
+              showStop(6)
               removeNeighborhoods()
+              drawGradient(0.02, 0.42);
             } else if (index === 9) {
+              showStop(7)
               drawNeighborhoods()
               lockdownColors()
-              drawGradient()
             } else if (index === 10) {
+              showStop(8)
               undoColor()
             } else if (index === 11) {
+              showStop(9)
               removeNeighborhoods()
             } else if (index === 12) {
+              showStop(10)
               removeBarsAndDrawMap()           
               postPanColors()
-              drawPostPanNeighborhoods()
+              // drawPostPanNeighborhoods()
             }
 
             stepSel1.classed("is-active", (d, i) => i === index);
