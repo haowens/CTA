@@ -1,45 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" data-version="1528749026774">
   <head>
+    <title>Easier scrollytelling with position sticky</title>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>CTA Ridership Changes</title>
-    <meta name="description" content="our first data story" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="./style.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="description"
+      content="Leaning on CSS to simplify the process."
+    />
+    <meta
+      name="news_keywords"
+      content="scrollytelling, position, sticky, css, graphic, interactive, data"
+    />
+
+    <link
+      rel="canonical"
+      href="https://pudding.cool/process/scrollytelling-sticky/"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- boilerplate.css -->
+
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <script src="https://unpkg.com/enter-view"></script>
+    <!-- <script src="https://unpkg.com/d3@5.4.0/dist/d3.min.js"></script> -->
+    <script src="https://unpkg.com/stickyfilljs@2.0.5/dist/stickyfill.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-tile@1"></script>
   </head>
-  <body>
+
+  <body class="tk-publico">
     <main id="content">
       <!-- <figure class="sticky">
-                    <div id="route"></div>
-              </figure>
-              <section class="filler">
-                <p>Scroll</p>
-              </section> -->
+            <div id="route"></div>
+      </figure>
+      <section class="filler">
+        <p>Scroll</p>
+      </section> -->
       <!-- 
-              <section id="scrolly-side">
-                <div class="scrolly">
-        
-                  <article>
-                    <div class="step" data-width="10%" data-index="0">
-                      <p>Bar is 10%</p>
-                    </div>
-                    <div class="step" data-width="90%" data-index="1">
-                      <p>Bar is 90%</p>
-                    </div>
-                    <div class="step" data-width="50%" data-index="2">
-                      <p>Bar is 50%</p>
-                    </div>
-                  </article>
-        
-        
-                  <figure class="sticky">
-                    <div class="mainfig" id="mainfig">
-             
-                    </div>
-                  </figure>
-                </div>
-              </section> -->
+      <section id="scrolly-side">
+        <div class="scrolly">
+
+          <article>
+            <div class="step" data-width="10%" data-index="0">
+              <p>Bar is 10%</p>
+            </div>
+            <div class="step" data-width="90%" data-index="1">
+              <p>Bar is 90%</p>
+            </div>
+            <div class="step" data-width="50%" data-index="2">
+              <p>Bar is 50%</p>
+            </div>
+          </article>
+
+
+          <figure class="sticky">
+            <div class="mainfig" id="mainfig">
+     
+            </div>
+          </figure>
+        </div>
+      </section> -->
 
       <section id="scrolly-overlay">
         <figure class="sticky">
@@ -211,138 +232,149 @@
       </section>
     </main>
 
-    <!-- <div class='debug'></div> -->
-    <script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
-    <script src="./scrollama.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3-tile@1"></script>
-
-    <!-- <script src="helpers.js"></script> -->
+    <script src="helpers.js"></script>
     <script src="route.js"></script>
     <script src="barGraph.js"></script>
     <script src="maps.js"></script>
     <script src="parallelScatter.js"></script>
+
     <script>
-      // using d3 for convenience
-      var main = d3.select("main");
-      var scrolly = main.select("#scrolly-overlay");
-      var figure = scrolly.select("#mainfig");
-      var article = scrolly.select("article");
-      var step = article.selectAll(".step");
+      const container1 = d3.select("#scrolly-overlay");
+      const stepSel1 = container1.selectAll(".step");
 
-      // initialize the scrollama
-      var scroller = scrollama();
+      function init1() {
+        Stickyfill.add(d3.select(".sticky").node());
+        initializeRoute();
+        drawBarGraphBackground();
 
-      // generic window resize listener event
-      function handleResize() {
-        // 1. update height of step elements
-        var stepH = Math.floor(window.innerHeight * 1);
-        step.style("height", stepH + "px");
-
-        var figureHeight = window.innerHeight / 1;
-        var figureMarginTop = (window.innerHeight - figureHeight) / 1;
-
-        figure
-          .style("height", figureHeight + "px")
-          .style("top", figureMarginTop + "px");
-
-        // 3. tell scrollama to update new element dimensions
-        scroller.resize();
-      }
-
-      // scrollama event handlers
-      function handleStepEnter(response) {
-        console.log(response);
-        // response = { element, direction, index }
-
-        // add color to current step only
-        step.classed("is-active", function (d, i) {
-          return i === response.index;
-        });
-
-        // update graphic based on step
-        figure.select("p").text(response.index + 1);
-
-        if (response.index === 0) {
-          console.log(response.index);
-          console.log(response.direction);
-          if (response.direction === "down") {
-          } else {
-            showStop(0);
-            removeBarChart();
-          }
-        } else if (response.index === 1) {
-          if (response.direction === "down") {
-            showStop(1);
-            addBarChart();
-          } else {
-            showStop(1);
-              removeLockdownLines();
-          }
-        } else if (response.index === 2) {
-          if (response.direction === "down") {
-            showStop(2);
+        enterView({
+          selector: stepSel1.nodes(),
+          offset: 0.5,
+          enter: (el) => {
+            const index = +d3.select(el).attr("data-index");
+            console.log(index);
+            stepSel1.classed("is-active", (d, i) => i === index);
+            if (index === 0) {
+            } else if (index === 1) {
+              showStop(1);
+              addBarChart();
+            } else if (index === 2) {
+              showStop(2);
               lockdownLines();
-          } else {
-            showStop(2);
-              removePostLockdownLines();
-          }
-        } else if (response.index === 3) {
-          if (response.direction === "down") {
-            showStop(3);
+              // removeBarsAndDrawMap()
+            } else if (index === 3) {
+              showStop(3);
               postLockdownLines();
-          } else {
-            showStop(3);
+            } else if (index === 4) {
+              showStop(4);
+              removeLabelsCompareAvgs();
+            } else if (index === 6) {
+              showStop(5);
+              removeBarsAndDrawMap();
+            } else if (index === 7) {
+              showStop(6);
+              lockdownColors();
+            } else if (index === 8) {
+              showStop(7);
+              drawNeighborhoods();
+            } else if (index === 10) {
+              showStop(8);
+              removeNeighborhoods();
+              undoColor();
+            } else if (index === 11) {
+              showStop(9);
+              postPanColors();
+            } else if (index === 12) {
+              showStop(10);
+              drawPostPanNeighborhoods();
+            } else if (index === 13) {
+              showStop(11);
+              parallelScatter();
+            }
+          },
+          exit: (el) => {
+            let index = +d3.select(el).attr("data-index");
+            index = Math.max(0, index - 1);
+            if (index === 0) {
+              showStop(0);
+              removeBarChart();
+            } else if (index === 1) {
+              showStop(1);
+              removeLockdownLines();
+            } else if (index === 2) {
+              showStop(2);
+              removePostLockdownLines();
+            } else if (index === 3) {
+              showStop(3);
               removeAvgs();
               drawYearLabels();
               addBarChart();
               lockdownLines();
               postLockdownLines();
-          }
-        } else if (response.index === 4) {
-          if (response.direction === "down") {
-            showStop(4);
-              removeLabelsCompareAvgs();
-          } else {
-            // sentences();
-          }
-        } else if (response.index === 5) {
-          if (response.direction === "down") {
-            showStop(5);
-              removeBarsAndDrawMap();
-          } else {
-            showStop(5);
+            } else if (index === 5) {
+              showStop(4);
+              removeMapBacktoAvgs();
+            } else if (index === 6) {
+              showStop(5);
               undoColor();
-          }
-        } else if (response.index === 6) {
-          if (response.direction === "down") {
-            showStop(6);
+            } else if (index === 7) {
+              showStop(6);
+              removeNeighborhoods();
+              drawGradient(0.02, 0.42);
+            } else if (index === 9) {
+              showStop(7);
+              drawNeighborhoods();
               lockdownColors();
-          } else {
-            // themes();
-          }
-        }
+            } else if (index === 10) {
+              showStop(8);
+              undoColor();
+            } else if (index === 11) {
+              showStop(9);
+              removeNeighborhoods();
+              drawGradient(0.17, 0.92);
+            } else if (index === 12) {
+              showStop(10);
+              removeBarsAndDrawMap();
+              postPanColors();
+              drawPostPanNeighborhoods();
+            }
+
+            stepSel1.classed("is-active", (d, i) => i === index);
+          },
+        });
       }
 
-      function init() {
-        // 1. force a resize on load to ensure proper dimensions are sent to scrollama
-        handleResize();
-        initializeRoute();
-        drawBarGraphBackground();
+      init1();
 
-        // 2. setup the scroller passing options
-        // 		this will also initialize trigger observations
-        // 3. bind scrollama event handlers (this can be chained like below)
-        scroller
-          .setup({
-            step: "#scrolly-overlay article .step",
-            offset: 0.33,
-            debug: false,
-          })
-          .onStepEnter(handleStepEnter);
-      }
+      //   const container2 = d3.select("#scrolly-overlay");
+      //   const stepSel2 = container2.selectAll(".step");
 
-      // kick things off
-      init();
+      //   function updateChart2(index) {
+      //     const sel = container2.select(`[data-index='${index}']`);
+      //     const width = sel.attr("data-width");
+      //     stepSel2.classed("is-active", (d, i) => i === index);
+      //     container2.select(".bar-inner").style("width", width);
+      //   }
+
+      //   function init2() {
+      //     Stickyfill.add(d3.select(".sticky").node());
+
+      //     enterView({
+      //       selector: stepSel2.nodes(),
+      //       offset: 0.5,
+      //       enter: (el) => {
+      //         const index = +d3.select(el).attr("data-index");
+      //         updateChart2(index);
+      //       },
+      //       exit: (el) => {
+      //         let index = +d3.select(el).attr("data-index");
+      //         index = Math.max(0, index - 1);
+      //         updateChart2(index);
+      //       },
+      //     });
+      //   }
+
+      //   init2();
     </script>
   </body>
 </html>

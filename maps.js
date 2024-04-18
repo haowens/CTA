@@ -155,14 +155,13 @@ function drawNeighborhoods() {
       .domain(d3.extent(data.features, (d) => d.properties.lockdownRelativeAvg))
       .range(["#2b2720", "#d9a74c"]);
 
-    // Append SVG elements for each neighborhood boundary
     svg2
       .selectAll(".neighborhood-path")
       .data(data.features)
       .enter()
       .append("path")
       .attr("class", "neighborhood-path")
-      .attr("d", path) // Use the path generator
+      .attr("d", path) 
       .attr("fill", (d) => {
         if (d.properties.lockdownRelativeAvg) {
           return colorScale(d.properties.lockdownRelativeAvg);
@@ -172,7 +171,10 @@ function drawNeighborhoods() {
       })
       .attr("opacity", "0.9")
       .attr("stroke", "#d9a74c")
-      .attr("stroke-width", 2);
+      .attr("stroke-width", 2)
+      .on("mouseover", (d) => {
+        console.log("hovering registers")
+      });
     // .append("title") // Add a title element for hover text
     // .text((d) => {console.log(d.properties.pri_neigh, "hey"); return d.properties.pri_neigh}); // Display neighborhood name on hover;
 
