@@ -1,5 +1,9 @@
 let circles;
 
+function removeBars() {
+  svg2.transition().selectAll("*").remove();
+}
+
 function removeBarsAndDrawMap() {
   svg2.transition().selectAll("*").remove();
 

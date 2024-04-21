@@ -113,12 +113,12 @@
           </figure>
 
           <!--  step text   -->
-          <article>
+          <article id="hard">
             <div class="step" data-width="10%" data-index="0">
               <p>Let's look at monthly ridership since January 2020.</p>
             </div>
             <div class="step" data-width="90%" data-index="1">
-              <p>Each bar represents a month.</p>
+              <p>Each bar represents a month. Hover over the bar to get specific details.</p>
             </div>
             <div class="step" data-width="50%" data-index="2">
               <p>
@@ -161,56 +161,63 @@
               </p>
             </div>
             <div class="step" data-width="50%" data-index="6">
-              <p>Now, let's look at things geographically.</p>
+              
             </div>
-            <div class="step" data-width="50%" data-index="7">
-              <p>
-                Let's look at ridership relative to before the pandemic as
-                recorded during
-                <span
-                  style="color: #d9a74c; font-weight: 600; font-size: xx-large"
-                >
-                  lockdown</span
-                >.
-              </p>
-            </div>
-            <div class="step" data-width="50%" data-index="8">
-              <p>How does this break down by neighborhood?</p>
-            </div>
-            <div class="step" data-width="50%" data-index="9">
-              <p>
-                There seems to be a significant correlation between the
-                neighborhoods income and their relative ridership during
-                lockdown.
-              </p>
-            </div>
-            <div class="step" data-width="50%" data-index="10">
-              <p>
-                Now let's reset, and look at the
-                <span
-                  style="color: #dbc09a; font-weight: 600; font-size: xx-large"
-                  >post-pandemic</span
-                >
-                ridership breakdown geographically.
-              </p>
-            </div>
-            <div class="step" data-width="50%" data-index="11">
-              <p>
-                Here is the breakdown by neighborhood of the last few months of
-                2023 relative to the pre-pandemic averages of those same months.
-              </p>
-            </div>
-            <div class="step" data-width="50%" data-index="12">
-              <p>Let's compare it to our lockdown graph.</p>
-            </div>
-            <div class="step" data-width="50%" data-index="13">
+            </article>
+            <article>
+              <div class="step" data-width="50%" data-index="7">
+                <p>Now, let's look at things geographically.</p>
+              </div>
+              <div class="step" data-width="50%" data-index="8">
+                <p>
+                  Let's look at ridership relative to before the pandemic as
+                  recorded during
+                  <span
+                    style="color: #d9a74c; font-weight: 600; font-size: xx-large"
+                  >
+                    lockdown</span
+                  >.
+                </p>
+              </div>
+              <div class="step" data-width="50%" data-index="9">
+                <p>How does this break down by neighborhood?</p>
+              </div>
+              <div class="step" data-width="50%" data-index="10">
+                <p>
+                  There seems to be a significant correlation between the
+                  neighborhoods income and their relative ridership during
+                  lockdown.
+                </p>
+              </div>
+              <div class="step" data-width="50%" data-index="11">
+                <p>
+                  Now let's reset, and look at the
+                  <span
+                    style="color: #dbc09a; font-weight: 600; font-size: xx-large"
+                    >post-pandemic</span
+                  >
+                  ridership breakdown geographically.
+                </p>
+              </div>
+              <div class="step" data-width="50%" data-index="12">
+                <p>
+                  Here is the breakdown by neighborhood of the last few months of
+                  2023 relative to the pre-pandemic averages of those same months.
+                </p>
+              </div>
+              <div class="step" data-width="50%" data-index="13">
+                <p>Let's compare it to our lockdown graph.</p>
+              </div>
+            </article>
+            <article>
+            <div class="step" data-width="50%" data-index="14">
               <p>
                 Let's look at this a different way. The colors of each line are
                 scaled by the per capita income of the neighborhood where the
                 stop is located.
               </p>
             </div>
-            <div class="step" data-width="50%" data-index="14">
+            <div class="step" data-width="50%" data-index="15">
               <p>
                 The takeaway from this graph seems to mostly be that the drastic
                 shift in CTA ridership only really persisted during lockdown. As
@@ -269,25 +276,27 @@
               showStop(4);
               removeLabelsCompareAvgs();
             } else if (index === 6) {
+              removeBars()
+            } else if (index === 7) {
               showStop(5);
               removeBarsAndDrawMap();
-            } else if (index === 7) {
+            } else if (index === 8) {
               showStop(6);
               lockdownColors();
-            } else if (index === 8) {
+            } else if (index === 9) {
               showStop(7);
               drawNeighborhoods();
-            } else if (index === 10) {
+            } else if (index === 11) {
               showStop(8);
               removeNeighborhoods();
               undoColor();
-            } else if (index === 11) {
+            } else if (index === 12) {
               showStop(9);
               postPanColors();
-            } else if (index === 12) {
+            } else if (index === 13) {
               showStop(10);
               drawPostPanNeighborhoods();
-            } else if (index === 13) {
+            } else if (index === 14) {
               showStop(11);
               parallelScatter();
             }
@@ -314,25 +323,25 @@
             } else if (index === 5) {
               showStop(4);
               removeMapBacktoAvgs();
-            } else if (index === 6) {
+            } else if (index === 7) {
               showStop(5);
               undoColor();
-            } else if (index === 7) {
+            } else if (index === 8) {
               showStop(6);
               removeNeighborhoods();
               drawGradient(0.02, 0.42);
-            } else if (index === 9) {
+            } else if (index === 10) {
               showStop(7);
               drawNeighborhoods();
               lockdownColors();
-            } else if (index === 10) {
+            } else if (index === 11) {
               showStop(8);
               undoColor();
-            } else if (index === 11) {
+            } else if (index === 12) {
               showStop(9);
               removeNeighborhoods();
               drawGradient(0.17, 0.92);
-            } else if (index === 12) {
+            } else if (index === 13) {
               showStop(10);
               removeBarsAndDrawMap();
               postPanColors();

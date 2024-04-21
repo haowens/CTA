@@ -329,7 +329,9 @@ function drawBarGraphBackground() {
     .attr("y", 0)
     .attr("width", width * (12 / 46))
     .attr("height", height)
-    .style("fill", "#3f3f3f90");
+    .style("fill", "#3f3f3f70")
+    .attr("class", "background-rect")
+    .on("mouseover", function(d) {console.log("save me helado negro")});
 
   svg2
     .append("rect")
@@ -337,7 +339,8 @@ function drawBarGraphBackground() {
     .attr("y", 0)
     .attr("width", width * (12 / 46))
     .attr("height", height)
-    .style("fill", "#38383890");
+    .attr("class", "background-rect")
+    .style("fill", "#38383870");
 
   svg2
     .append("rect")
@@ -345,7 +348,8 @@ function drawBarGraphBackground() {
     .attr("y", 0)
     .attr("width", width * (12 / 46))
     .attr("height", height)
-    .style("fill", "#32313190");
+    .attr("class", "background-rect")
+    .style("fill", "#32313170");
 
   svg2
     .append("rect")
@@ -353,7 +357,8 @@ function drawBarGraphBackground() {
     .attr("y", 0)
     .attr("width", width * (12 / 46))
     .attr("height", height)
-    .style("fill", "#2b2b2b90");
+    .attr("class", "background-rect")
+    .style("fill", "#2b2b2b70");
 
   drawYearLabels();
 }
@@ -563,13 +568,7 @@ function removeLabelsCompareAvgs() {
   svg2.selectAll(".bar-over-post").remove();
   svg2.selectAll(".bar-over").remove();
   svg2.selectAll(".year-label").remove();
-
-  // labels.transition().duration(1000).attr("visibility", "hidden");
-  // barChart.transition().duration(1000).attr("visibility", "hidden");
-  // label1.transition().duration(1000).attr("visibility", "hidden");
-  // label2.transition().duration(1000).attr("visibility", "hidden");
-  // line1.transition().duration(1000).attr("visibility", "hidden");
-  // line2.transition().duration(1000).attr("visibility", "hidden");
+  // svg2.selectAll(".background-rect").remove();
 
   periodAvgs.forEach((item) => {
     svg2
