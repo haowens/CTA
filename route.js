@@ -1,10 +1,8 @@
-let svg;
-function initializeRoute() {
-  let margin = { top: 0, right: 0, bottom: 0, left: 0 },
-    width = window.innerWidth - margin.left - margin.right,
-    height = 153 - margin.top - margin.bottom;
+let margin = { top: 0, right: 0, bottom: 0, left: 0 },
+width = window.innerWidth - margin.left - margin.right,
+height = 153 - margin.top - margin.bottom;
 
-  svg = d3
+const svg = d3
     .select("#route")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -12,6 +10,9 @@ function initializeRoute() {
     .append("g")
     .style("z-index", 10)
     .attr("transform", `translate(${margin.left},${margin.top})`);
+
+function initializeRoute() {
+
 
   const rectWidth = window.innerWidth;
   const rectHeight = 42;
@@ -37,7 +38,8 @@ function initializeRoute() {
       .attr("r", isBlackBorder ? 22 : 15) // Radius of the dot
       .style("stroke", isBlackBorder ? "black" : "none")
       .style("stroke-width", isBlackBorder ? 8 : 0)
-      .style("fill", "white");
+      .style("fill", "white")
+      .on("mouseover", function(d) {console.log("yoo")});
 
       svg
       .append("circle")

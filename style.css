@@ -60,7 +60,7 @@ body {
     /* transform: translateY(-10%); */
     width: 60vw;
     height: 30vh;
-    z-index: -1;
+    z-index: 10;
   }
   
   #scrolly-side .scrolly figure.sticky .bar-inner {
@@ -102,7 +102,7 @@ body {
     width: 100%;
     /* max-width: 30rem; */
     margin: 0 auto;
-    position: relative;
+    /* position: relative; */
 }
 
 #scrolly-overlay .scrolly article .step {
@@ -120,6 +120,7 @@ body {
 #scrolly-overlay .scrolly article .step.is-active p {
   /* background-color: #5f4e319d; */
   border: 2px solid black;
+  z-index: -5;
 }
 
 #scrolly-overlay .scrolly article .step p {
@@ -161,4 +162,16 @@ body {
     margin: 0;
     /* border: 1px solid pink; */
     left: 0;
+}
+
+.tooltip{
+  margin: 0 auto;
+  color: white;
+  position: absolute;
+  bottom: -35px;
+  right: 20px;
+  width: 500px;
+  text-align: right;
+  font-size: .8em;
+  font-weight: 700;
 }

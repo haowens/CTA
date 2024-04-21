@@ -316,135 +316,196 @@ svg2 = d3
   .append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
+  .attr("class", "fig")
   .append("g")
   .attr("transform", `translate(${margin.left},${margin.top})`);
 
 var y = d3.scaleLinear().domain([0, maxRides]).range([height, 0]);
 
+var tooltip = d3
+  .select("#mainfig")
+  .append("div")
+  .style("opacity", 0)
+  .attr("class", "tooltip");
+
+// change tooltip text based on position in story
+function returnTooltipText(step, d) {
+  switch (step) {
+    case "month":
+      return d.month
+      break;
+  }
+}
+
+// create 2 functions to show and hide the tooltip
+var showTooltip = function (d) {
+  tooltip.transition().duration(50);
+  tooltip.style("opacity", 1).html(returnTooltipText(toolTipState, d));
+};
+
+var hideTooltip = function (d) {
+  tooltip.transition().duration(50).style("opacity", 0);
+};
+
+//background rectangles
+svg2
+  .append("rect")
+  .attr("x", 0)
+  .attr("y", 0)
+  .attr("width", width * (12 / 46))
+  .attr("height", height)
+  .style("fill", "#3f3f3f90")
+  .attr("class", "background-rect")
+  .attr("visibility", "visible")
+  .on("mouseover", function (d) {
+    console.log("here");
+  });
+
+svg2
+  .append("rect")
+  .attr("x", width * (12 / 46))
+  .attr("y", 0)
+  .attr("width", width * (12 / 46))
+  .attr("height", height)
+  .style("fill", "#38383890")
+  .attr("class", "background-rect")
+  .attr("visibility", "visible");
+
+svg2
+  .append("rect")
+  .attr("x", width * (24 / 46))
+  .attr("y", 0)
+  .attr("width", width * (12 / 46))
+  .attr("height", height)
+  .style("fill", "#32313190")
+  .attr("class", "background-rect")
+  .attr("visibility", "visible");
+
+svg2
+  .append("rect")
+  .attr("x", width * (36 / 46))
+  .attr("y", 0)
+  .attr("width", width * (12 / 46))
+  .attr("height", height)
+  .style("fill", "#2b2b2b90")
+  .attr("class", "background-rect")
+  .attr("visibility", "visible");
+
+// year labels
+svg2
+  .append("text")
+  .attr("x", width * (12 / 46) - 50)
+  .attr("y", height / 12)
+  .attr("fill", "#878787")
+  .attr("class", "year-label")
+  .attr("text-anchor", "middle")
+  .attr("alignment-baseline", "middle")
+  .style("font-size", "xx-large")
+  .attr("font-family", "Helvetica")
+  .attr("font-weight", "700")
+  .attr("visibility", "visible")
+  .text("2020");
+
+svg2
+  .append("text")
+  .attr("x", width * (24 / 46) - 50)
+  .attr("y", height / 12)
+  .attr("fill", "#878787")
+  .attr("class", "year-label")
+  .attr("text-anchor", "middle")
+  .attr("alignment-baseline", "middle")
+  .style("font-size", "xx-large")
+  .attr("font-family", "Helvetica")
+  .attr("font-weight", "700")
+  .attr("visibility", "visible")
+  .text("2021")
+  .on("mouseover", function (d) {
+    console.log("yoohoo");
+  });
+
+svg2
+  .append("text")
+  .attr("x", width * (36 / 46) - 50)
+  .attr("y", height / 12)
+  .attr("fill", "#878787")
+  .attr("class", "year-label")
+  .attr("text-anchor", "middle")
+  .attr("alignment-baseline", "middle")
+  .style("font-size", "xx-large")
+  .attr("font-family", "Helvetica")
+  .attr("font-weight", "700")
+  .attr("visibility", "visible")
+  .text("2022");
+
+svg2
+  .append("text")
+  .attr("x", width * (46 / 46) - 50)
+  .attr("y", height / 12)
+  .attr("fill", "#878787")
+  .attr("class", "year-label")
+  .attr("text-anchor", "middle")
+  .attr("alignment-baseline", "middle")
+  .style("font-size", "xx-large")
+  .attr("font-family", "Helvetica")
+  .attr("font-weight", "700")
+  .attr("visibility", "visible")
+  .text("2023");
+
+// bar chart
+svg2
+  .append("g")
+  .call(d3.axisLeft(y))
+  .selectAll("text")
+  .attr("fill", "white")
+  .attr("visibility", "hidden")
+  .attr("class", "bar-annotations");
+
+svg2
+  .selectAll("mybar")
+  .data(monthAvgData)
+  .enter()
+  .append("rect")
+  .attr("x", function (d) {
+    return x(d.month);
+  })
+  .attr("y", function (d) {
+    return y(d.rides);
+  })
+  .attr("width", x.bandwidth())
+  .attr("height", function (d) {
+    return height - y(d.rides);
+  })
+  .attr("class", "bar-annotations")
+  .attr("visibility", "hidden")
+  .attr("fill", "#574f44DF")
+  .attr("stroke", "#2e2a25")
+  .attr("stroke-width", "1")
+  .on("mouseover", showTooltip )
+  .on("mouseleave", hideTooltip );  
+
 // bar graph functions
 function drawBarGraphBackground() {
-  svg2
-    .append("rect")
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("width", width * (12 / 46))
-    .attr("height", height)
-    .style("fill", "#3f3f3f90");
-
-  svg2
-    .append("rect")
-    .attr("x", width * (12 / 46))
-    .attr("y", 0)
-    .attr("width", width * (12 / 46))
-    .attr("height", height)
-    .style("fill", "#38383890");
-
-  svg2
-    .append("rect")
-    .attr("x", width * (24 / 46))
-    .attr("y", 0)
-    .attr("width", width * (12 / 46))
-    .attr("height", height)
-    .style("fill", "#32313190");
-
-  svg2
-    .append("rect")
-    .attr("x", width * (36 / 46))
-    .attr("y", 0)
-    .attr("width", width * (12 / 46))
-    .attr("height", height)
-    .style("fill", "#2b2b2b90");
-
+  d3.selectAll(".background-rect")
+    .transition()
+    .duration(50)
+    .attr("visibility", "visible");
   drawYearLabels();
 }
 
 function drawYearLabels() {
-  svg2
-    .append("text")
-    .attr("x", width * (12 / 46) - 50)
-    .attr("y", height / 12)
-    .attr("fill", "#878787")
-    .attr("class", "year-label")
-    .attr("text-anchor", "middle")
-    .attr("alignment-baseline", "middle")
-    .style("font-size", "xx-large")
-    .attr("font-family", "Helvetica")
-    .attr("font-weight", "700")
-    .text("2020");
-
-  svg2
-    .append("text")
-    .attr("x", width * (24 / 46) - 50)
-    .attr("y", height / 12)
-    .attr("fill", "#878787")
-    .attr("class", "year-label")
-    .attr("text-anchor", "middle")
-    .attr("alignment-baseline", "middle")
-    .style("font-size", "xx-large")
-    .attr("font-family", "Helvetica")
-    .attr("font-weight", "700")
-    .text("2021");
-
-  svg2
-    .append("text")
-    .attr("x", width * (36 / 46) - 50)
-    .attr("y", height / 12)
-    .attr("fill", "#878787")
-    .attr("class", "year-label")
-    .attr("text-anchor", "middle")
-    .attr("alignment-baseline", "middle")
-    .style("font-size", "xx-large")
-    .attr("font-family", "Helvetica")
-    .attr("font-weight", "700")
-    .text("2022");
-
-  svg2
-    .append("text")
-    .attr("x", width * (46 / 46) - 50)
-    .attr("y", height / 12)
-    .attr("fill", "#878787")
-    .attr("class", "year-label")
-    .attr("text-anchor", "middle")
-    .attr("alignment-baseline", "middle")
-    .style("font-size", "xx-large")
-    .attr("font-family", "Helvetica")
-    .attr("font-weight", "700")
-    .text("2023");
+  d3.selectAll(".year-label")
+    .transition()
+    .duration(50)
+    .attr("visibility", "visible");
 }
 
 function addBarChart() {
-  labels = svg2
-    .append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x))
-    .selectAll("text")
-    .style("text-anchor", "center")
-    .style("font-size", "14px")
-    .style("font-weight", "bold")
-    .attr("fill", "black");
-
-  // Add Y axis (hidden b/c black)
-  svg2.append("g").call(d3.axisLeft(y)).selectAll("text").attr("fill", "white");
-
-  const barChart = svg2
-    .selectAll("mybar")
-    .data(monthAvgData)
-    .enter()
-    .append("rect")
-    .attr("x", function (d) {
-      return x(d.month);
-    })
-    .attr("y", function (d) {
-      return y(d.rides);
-    })
-    .attr("width", x.bandwidth())
-    .attr("height", function (d) {
-      return height - y(d.rides);
-    })
-    .attr("class", "bar-annotations")
-    .attr("fill", "#574f44DF")
-    .attr("stroke", "#2e2a25")
-    .attr("stroke-width", "1");
+  svg2
+    .selectAll(".bar-annotations")
+    .transition()
+    .duration(50)
+    .attr("visibility", "visible");
+  console.log("g");
 }
 
 function lockdownLines() {
@@ -555,7 +616,11 @@ function removePostLockdownLines() {
 }
 
 function removeBarChart() {
-  svg2.selectAll(".bar-annotations").remove();
+  svg2
+    .selectAll(".bar-annotations")
+    .transition()
+    .duration(50)
+    .attr("visibility", "hidden");
 }
 
 function removeLabelsCompareAvgs() {
