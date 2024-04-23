@@ -118,7 +118,7 @@
               <p>Let's look at monthly ridership since January 2020.</p>
             </div>
             <div class="step" data-width="90%" data-index="1">
-              <p>Each bar represents a month. Hover over the bar to get specific details.</p>
+              <p>Each bar represents a month.</p>
             </div>
             <div class="step" data-width="50%" data-index="2">
               <p>
@@ -160,64 +160,94 @@
                 official end of the pandemic.
               </p>
             </div>
-            <div class="step" data-width="50%" data-index="6">
-              
+            <div class="step" data-width="50%" data-index="6"></div>
+          </article>
+          <article>
+            <div class="step" data-width="50%" data-index="7">
+              <p>
+                Now, let's look at things geographically. Hover over any of the
+                circles to see the stop and the lines it serves
+              </p>
             </div>
-            </article>
-            <article>
-              <div class="step" data-width="50%" data-index="7">
-                <p>Now, let's look at things geographically.</p>
-              </div>
-              <div class="step" data-width="50%" data-index="8">
-                <p>
-                  Let's look at ridership relative to before the pandemic as
-                  recorded during
-                  <span
-                    style="color: #d9a74c; font-weight: 600; font-size: xx-large"
-                  >
-                    lockdown</span
-                  >.
-                </p>
-              </div>
-              <div class="step" data-width="50%" data-index="9">
-                <p>How does this break down by neighborhood?</p>
-              </div>
-              <div class="step" data-width="50%" data-index="10">
-                <p>
-                  There seems to be a significant correlation between the
-                  neighborhoods income and their relative ridership during
-                  lockdown.
-                </p>
-              </div>
-              <div class="step" data-width="50%" data-index="11">
-                <p>
-                  Now let's reset, and look at the
-                  <span
-                    style="color: #dbc09a; font-weight: 600; font-size: xx-large"
-                    >post-pandemic</span
-                  >
-                  ridership breakdown geographically.
-                </p>
-              </div>
-              <div class="step" data-width="50%" data-index="12">
-                <p>
-                  Here is the breakdown by neighborhood of the last few months of
-                  2023 relative to the pre-pandemic averages of those same months.
-                </p>
-              </div>
-              <div class="step" data-width="50%" data-index="13">
-                <p>Let's compare it to our lockdown graph.</p>
-              </div>
-            </article>
-            <article>
+            <div class="step" data-width="50%" data-index="8">
+              <p>
+                Let's look at ridership relative to before the pandemic as
+                recorded during
+                <span
+                  style="color: #d9a74c; font-weight: 600; font-size: xx-large"
+                >
+                  lockdown</span
+                >.
+              </p>
+            </div>
+            <div class="step" data-width="50%" data-index="9">
+              <p>
+                How does this break down by neighborhood? Hover over the
+                neighborhoods to see their names.
+              </p>
+            </div>
+            <div class="step" data-width="50%" data-index="10">
+              <p>
+                There seems to be a significant correlation between the
+                neighborhoods income and their relative ridership during
+                lockdown—the larger the dots, the larger the average per capita
+                annual income.
+              </p>
+            </div>
+            <div class="step" data-width="50%" data-index="11">
+              <p>
+                Now let's reset, and look at the
+                <span
+                  style="color: #dbc09a; font-weight: 600; font-size: xx-large"
+                  >post-pandemic</span
+                >
+                ridership breakdown geographically.
+              </p>
+            </div>
+            <div class="step" data-width="50%" data-index="12">
+              <p>Here is the breakdown by neighborhood.</p>
+            </div>
+            <div class="step" data-width="50%" data-index="13">
+              <p>Let's compare it to relative ridership during lockdown. The bigger the circles, the higher the relative ridership during lockdown.</p>
+            </div>
             <div class="step" data-width="50%" data-index="14">
+              <p>
+                Any patterns are much less evident, although it does seem like
+                more often than not stops whos relative ridership spiked during
+                lockdown now have less relative ridership than stops who's
+                lockdown relative ridership was on the lower end of the
+                spectrum.
+              </p>
+            </div>
+            <div class="step" data-index="15"></div>
+          </article>
+
+          <section>
+            <p  style="
+            color: white;
+            width: 50%;
+            font-size: 20px;
+            margin-left: 25%;
+            margin-top: 5%;
+            margin-bottom: 25%;
+          ">Let's look at this a different way. The colors of each line are
+              scaled by the per capita income of the neighborhood where the
+              stop is located.</p>
+            <figure>
+              <div id="parallelScatter"></div>
+            </figure>  
+            
+
+          </section>
+          <!-- <article>
+            <div class="step" data-width="50%" data-index="15">
               <p>
                 Let's look at this a different way. The colors of each line are
                 scaled by the per capita income of the neighborhood where the
                 stop is located.
               </p>
             </div>
-            <div class="step" data-width="50%" data-index="15">
+            <div class="step" data-width="50%" data-index="16">
               <p>
                 The takeaway from this graph seems to mostly be that the drastic
                 shift in CTA ridership only really persisted during lockdown. As
@@ -230,12 +260,8 @@
                 lockdown.
               </p>
             </div>
-          </article>
+          </article> -->
         </div>
-      </section>
-
-      <section class="filler">
-        <p>End</p>
       </section>
     </main>
 
@@ -253,6 +279,7 @@
         Stickyfill.add(d3.select(".sticky").node());
         initializeRoute();
         drawBarGraphBackground();
+        parallelScatter();
 
         enterView({
           selector: stepSel1.nodes(),
@@ -276,7 +303,7 @@
               showStop(4);
               removeLabelsCompareAvgs();
             } else if (index === 6) {
-              removeBars()
+              removeBars();
             } else if (index === 7) {
               showStop(5);
               removeBarsAndDrawMap();
@@ -286,20 +313,27 @@
             } else if (index === 9) {
               showStop(7);
               drawNeighborhoods();
+            } else if (index === 10) {
+              drawIncome();
             } else if (index === 11) {
               showStop(8);
               removeNeighborhoods();
               undoColor();
+              postPanColors();
             } else if (index === 12) {
               showStop(9);
-              postPanColors();
+              drawPostPanNeighborhoods();
             } else if (index === 13) {
               showStop(10);
-              drawPostPanNeighborhoods();
-            } else if (index === 14) {
+              drawLockdownOnPostPan();
+            } else if (index === 15) {
               showStop(11);
-              parallelScatter();
+              clearAll()
             }
+            // } else if (index === 14) {
+            //   showStop(11);
+            //   parallelScatter();
+            // }
           },
           exit: (el) => {
             let index = +d3.select(el).attr("data-index");
@@ -323,6 +357,8 @@
             } else if (index === 5) {
               showStop(4);
               removeMapBacktoAvgs();
+            } else if (index === 6) {
+              // removeIncomePattern()
             } else if (index === 7) {
               showStop(5);
               undoColor();
@@ -330,22 +366,29 @@
               showStop(6);
               removeNeighborhoods();
               drawGradient(0.02, 0.42);
+            } else if (index === 9) {
+              removeCirclePattern();
             } else if (index === 10) {
               showStop(7);
               drawNeighborhoods();
+              drawIncome();
               lockdownColors();
             } else if (index === 11) {
               showStop(8);
-              undoColor();
-            } else if (index === 12) {
-              showStop(9);
+              postPanColors();
               removeNeighborhoods();
               drawGradient(0.17, 0.92);
+            } else if (index === 12) {
+              showStop(9);
+              drawPostPanNeighborhoods()
+              removeCirclePattern()
             } else if (index === 13) {
-              showStop(10);
+            } else if (index === 14) {
               removeBarsAndDrawMap();
               postPanColors();
               drawPostPanNeighborhoods();
+              drawLockdownOnPostPan();
+              showStop(10);
             }
 
             stepSel1.classed("is-active", (d, i) => i === index);
@@ -354,36 +397,6 @@
       }
 
       init1();
-
-      //   const container2 = d3.select("#scrolly-overlay");
-      //   const stepSel2 = container2.selectAll(".step");
-
-      //   function updateChart2(index) {
-      //     const sel = container2.select(`[data-index='${index}']`);
-      //     const width = sel.attr("data-width");
-      //     stepSel2.classed("is-active", (d, i) => i === index);
-      //     container2.select(".bar-inner").style("width", width);
-      //   }
-
-      //   function init2() {
-      //     Stickyfill.add(d3.select(".sticky").node());
-
-      //     enterView({
-      //       selector: stepSel2.nodes(),
-      //       offset: 0.5,
-      //       enter: (el) => {
-      //         const index = +d3.select(el).attr("data-index");
-      //         updateChart2(index);
-      //       },
-      //       exit: (el) => {
-      //         let index = +d3.select(el).attr("data-index");
-      //         index = Math.max(0, index - 1);
-      //         updateChart2(index);
-      //       },
-      //     });
-      //   }
-
-      //   init2();
     </script>
   </body>
 </html>

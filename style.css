@@ -29,6 +29,11 @@ body {
   section {
     display: flex;
     flex-direction: column;
+    z-index: 0;
+  }
+
+  figure {
+    z-index: 5;
   }
 
   figure.sticky {
@@ -41,17 +46,6 @@ body {
     left: 0;
     z-index: 5;
   }
-
-  /* figure.fixed {
-    position: sticky;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(187, 40, 40, 0);
-    margin: 0;
-    top: 0;
-    left: 0;
-    z-index: 1;
-  } */
   
   #mainfig {
     position: sticky;
@@ -117,7 +111,6 @@ body {
 
 #scrolly-overlay .scrolly #hard .step {
     height: 120vh;
-    border: 1px solid yellow;
     margin-left: 30%;
     margin-right: 30%;
     /* margin-bottom: 1rem; */
@@ -126,7 +119,6 @@ body {
 
 #scrolly-overlay .scrolly article .step {
   height: 120vh;
-  border: 1px solid yellow;
   margin-left: 65%;
   margin-right: 0%;
   /* margin-bottom: 1rem; */
@@ -181,4 +173,17 @@ body {
     margin: 0;
     /* border: 1px solid pink; */
     left: 0;
+}
+
+.tooltip{
+  margin: 0 auto;
+  color: white;
+  position: absolute;
+  bottom: 0px;
+  right: 50%;
+  width: 500px;
+  border: 1px solid pink;
+  text-align: right;
+  font-size: .8em;
+  font-weight: 700;
 }
