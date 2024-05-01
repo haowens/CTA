@@ -9,8 +9,8 @@ var tooltip = d3
   .style("background-color", "rgba(211, 211, 211, 0.85)");
 
 function parallelScatter() {
-  let margin = { top: 90, right: 100, bottom: 150, left: 0 },
-    width = window.innerWidth * (8.2 / 10),
+  let margin = { top: 90, right: 70, bottom: 150, left: 70 },
+    width = window.innerWidth * (7 / 10),
     height = 520;
 
   let svg3 = d3
@@ -40,6 +40,7 @@ function parallelScatter() {
       "lockdownRelativeAvg",
       "postPanRelativeAvg",
       "postPanAvgRidership",
+      "panAverageRidership"
     ];
 
     dimensions = data.columns.filter((key) => {
@@ -94,6 +95,7 @@ function parallelScatter() {
       .append("path")
       .attr("id", (d) => d["station name"])
       .attr("d", line)
+      .attr("stroke-width", "1.5px")
       .style("z-index", 0)
       // .attr("stroke", "purple")
       .attr("stroke", (d) => {
@@ -109,9 +111,10 @@ function parallelScatter() {
       .on("mouseover", function (e, d) {
         console.log(this);
         svg3.selectAll("path").attr("opacity", 0.2);
-        d3.select(this).attr("stroke", "white");
-        d3.select(this).attr("stroke-width", "2px");
+        // d3.select(this).attr("stroke", "white");
+        d3.select(this).attr("stroke-width", "4px");
         d3.select(this).attr("opacity", "1");
+        d3.select(this).raise()
         let colors = d["routes served"].split(",");
 
         let tooltipHTML = `<div style="height:100px; width:250px"><p style="margin:0px 10px;margin-top:10px;margin-bottom: 0px"><b>${d["station name"]}<b></p><p style="margin:0px;margin-left:10px;color:gray">${d["Districts/Neighborhoods"]}</p><svg>`;
@@ -152,16 +155,17 @@ function parallelScatter() {
               ? startYCoordinate + 170 + "px"
               : startYCoordinate - 0 + "px"
           )
-          .style("left", "150px")
+          .style("left", "40px")
           .html(tooltipHTML);
       })
       .on("mouseout", function () {
-        d3.select(this).attr("stroke", (d) => {
-          if (!colorScale(d.income)) {
-            console.log(d);
-          }
-          return colorScale(d.income);
-        });
+        // d3.select(this).attr("stroke", (d) => {
+        //   if (!colorScale(d.income)) {
+        //     console.log(d);
+        //   }
+        //   return colorScale(d.income);
+        // });
+        d3.select(this).attr("stroke-width", "1.5px")
         svg3.selectAll("path").attr("opacity", 1);
         return tooltip.style("visibility", "hidden");
       });
@@ -171,7 +175,7 @@ function parallelScatter() {
       .attr("fill", "black")
       .attr("x", x("postPanAvgRidership"))
       .attr("y", 0)
-      .attr("width", width / 4)
+      .attr("width", width / 5)
       .attr("height", height);
 
     var g = svg3
