@@ -294,7 +294,7 @@ const periodAvgs = [
 let svg2;
 
 let margin = { top: 5, right: 0, bottom: 150, left: 0 },
-  width = window.innerWidth - margin.left - margin.right,
+  width = 1440 - margin.left - margin.right,
   height = window.innerHeight - margin.top - margin.bottom;
 
 var maxRides = d3.max(monthAvgData, function (d) {

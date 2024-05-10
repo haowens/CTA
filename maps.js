@@ -21,7 +21,7 @@ function removeBarsAndDrawMap() {
   //   (height = window.innerHeight * (4/4) - margin.top - margin.bottom);
   (margin = { top: 0, right: 0, bottom: 0, left: 0 }),
     (width = 650 - margin.left - margin.right),
-    (height = 620 * (4 / 4) - margin.top - margin.bottom);
+    (height = 620- margin.top - margin.bottom);
 
   // append the svg object to the body of the page
   const mapWidth = width; // Define width of the map 650

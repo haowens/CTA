@@ -30,6 +30,10 @@ body {
     display: flex;
     flex-direction: column;
     z-index: 0;
+    max-width: 1440px;
+      /* max-width: 150ch;
+      border: 5px solid green; */
+    
   }
 
   figure {
@@ -68,15 +72,17 @@ body {
     position: sticky;
     width: 100%;
     z-index: 10;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.838);
     border-bottom: 2px solid gray;
+
   }
 
   #scrolly-overlay {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100vw;
+    justify-content: center;
+    max-width: 1440px;
     background-color: transparent;
   }
 
@@ -186,4 +192,11 @@ body {
   text-align: right;
   font-size: .8em;
   font-weight: 700;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
